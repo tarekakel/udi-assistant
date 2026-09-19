@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UDI Assistant</title>
+<link rel="stylesheet" href="/app/app.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="side-brand">
+      <div class="mark">UDI</div>
+      <div><div class="name">UDI Assistant</div><div class="sub">Life-sciences master data</div></div>
+    </div>
+    <nav class="side-nav" id="nav">
+      <a href="#/devices" data-view="devices"><span class="ico">▦</span> Devices</a>
+      <a href="#/audit" data-view="audit"><span class="ico">≡</span> Audit trail</a>
+      <a href="#/ask" data-view="ask"><span class="ico">?</span> Ask the regulation</a>
+      <a href="#/sources" data-view="sources"><span class="ico">§</span> Knowledge sources</a>
+      <a href="#/about" data-view="about"><span class="ico">i</span> About</a>
+    </nav>
+    <div class="side-user">
+      <div class="avatar" id="avatar">?</div>
+      <div class="who">
+        <div class="email" id="userEmail">…</div>
+        <div class="roles" id="userRoles"></div>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="logout" title="Log out">Log out</button>
+    </div>
+  </aside>
+
+  <div class="content">
+    <header class="topbar">
+      <button class="btn btn-ghost btn-sm menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      <div class="crumbs" id="crumbs">Devices</div>
+      <div class="mode-pill" id="modePill"></div>
+    </header>
+    <div class="notice" id="notice" role="status" hidden></div>
+    <main class="view" id="view"></main>
+  </div>
+</div>
+<script src="/app/app.js"></script>
+</body>
+</html>

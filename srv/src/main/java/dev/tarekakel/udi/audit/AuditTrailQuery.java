@@ -20,4 +20,9 @@ public class AuditTrailQuery {
                 .map(AuditEntryResponse::from)
                 .toList();
     }
+
+    /** Newest first, across all entities; what a reviewer opens to see "what happened recently". */
+    public List<AuditEntryResponse> recent() {
+        return entries.findTop200ByOrderByPerformedAtDesc().stream().map(AuditEntryResponse::from).toList();
+    }
 }

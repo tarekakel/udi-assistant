@@ -2,6 +2,25 @@
 
 A running log of non-obvious decisions, and of places where a tool, a library, or an AI-generated suggestion was wrong and what was done about it. Newest first.
 
+## 2026-09-19 — A framework-free UI served as static files; sign-in delegates to XSUAA
+
+**Decision.** The UI is plain HTML/CSS/JS under `approuter/resources`: the router serves it on BTP, Spring serves the
+same folder locally (`spring.web.resources.static-locations`). No bundler, no framework, no second build pipeline in
+the MTA. The "login page" is a public landing page whose only action on BTP is to start the XSUAA flow; locally it asks
+for a name that becomes the `X-User` header.
+
+**Why.** The frontend must not become the largest moving part of a backend-focused demo, and a custom credentials form
+would be the wrong thing to build on a platform whose identity provider *is* the login. The table (search, filters,
+sorting, column toggles, selection, pagination, row actions) follows the OriginUI/TanStack pattern so the interaction
+model is familiar to reviewers.
+
+**Deliberate rules.** No browser dialogs: reasons, edits and new records are inline forms. Write actions are hidden
+without the `Editor` scope, and the service enforces the same rule regardless. Session expiry is detected on the next
+API call (the router answers with a redirect) and returns the user to the sign-in page rather than showing a broken
+table.
+
+**Next.** A SAPUI5 (TypeScript) client for the same API remains on the roadmap; this UI is the interim demo surface.
+
 ## 2026-09-19 — RAG assistant: retrieval decides what the model sees; citations come from metadata
 
 **Decision.** The regulation corpus ships with the application as Markdown (one chunk per section), is embedded

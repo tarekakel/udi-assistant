@@ -94,6 +94,18 @@ class DeviceApiTest {
     }
 
     @Test
+    void recentTrailSpansAllDevicesNewestFirst() throws Exception {
+        String first = create(uniqueUdiDi());
+        String second = create(uniqueUdiDi());
+
+        mvc.perform(get("/api/audit-trail"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].entityType").value("Device"))
+                .andExpect(jsonPath("$[0].entityId").value(second))
+                .andExpect(jsonPath("$[1].entityId").value(first));
+    }
+
+    @Test
     void rejectsStaleVersion() throws Exception {
         String id = create(uniqueUdiDi());
 

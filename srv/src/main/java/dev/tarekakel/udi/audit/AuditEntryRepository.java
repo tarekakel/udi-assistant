@@ -10,4 +10,6 @@ interface AuditEntryRepository extends Repository<AuditEntry, UUID> {
     AuditEntry save(AuditEntry entry);
 
     List<AuditEntry> findByEntityTypeAndEntityIdOrderByPerformedAtAsc(String entityType, String entityId);
+
+    List<AuditEntry> findTop200ByOrderByPerformedAtDesc();
 }

@@ -24,13 +24,31 @@ cd srv
 .\mvnw.cmd spring-boot:run
 ```
 
-- API: http://localhost:8080/api/devices (five seeded devices)
-- Audit trail: http://localhost:8080/api/devices/{id}/audit-trail
+- **UI:** http://localhost:8080/ — the same single-page app the approuter serves on BTP (Spring serves
+  `approuter/resources` as static content locally). There is no identity provider locally, so the sign-in page asks for
+  a name; it is sent as `X-User` and recorded in the audit trail.
+- API: http://localhost:8080/api/devices (20 seeded devices with lifecycle history)
+- Audit trail: http://localhost:8080/api/audit-trail (all devices, newest first) and `/api/devices/{id}/audit-trail`
 - H2 console: http://localhost:8080/h2-console (JDBC URL `jdbc:h2:mem:udi`, user `sa`, no password)
 - Health: http://localhost:8080/actuator/health
 
-Locally there is no login; pass `X-User: <name>` to have the audit trail record you. Secrets go in `srv/.env`
-(copy `srv/.env.example`).
+Secrets go in `srv/.env` (copy `srv/.env.example`).
+
+## The UI
+
+Plain HTML/CSS/JS in `approuter/resources` — no framework and no build step, so the approuter serves it as static
+files and Spring serves the same files locally.
+
+| Page | What it does |
+|---|---|
+| Sign in (`/index.html`, public) | On BTP: hands over to XSUAA ("Sign in with SAP BTP"). Locally: pick the name to record. |
+| Devices | Data table with search, status filter with counts, sortable columns, column visibility, row selection with CSV export, pagination. Row actions: audit trail, review against the regulation, copy UDI-DI, status transitions and edit (Editor only). Every write asks for a reason **inline**, never in a browser popup. |
+| Audit trail | Last 200 entries across all devices: when, device, action, field, old → new, reason, by. |
+| Ask the regulation | Question box with suggested questions; each answer shows its citations and the retrieved passages. |
+| Knowledge sources | The corpus the assistant can cite, by source and section. |
+| About | What the project demonstrates, the stack, and the current session (mode, user, scopes). |
+
+A SAPUI5 (TypeScript) client for the same API is the planned next UI step.
 
 ## Deploy to SAP BTP
 
@@ -48,9 +66,11 @@ Then, once per user, in the BTP Cockpit: **Security → Users → your user → 
 
 | Try | Expect |
 |---|---|
-| Open the router URL | XSUAA login, then the device list with your identity and scopes |
-| Advance a status, enter a reason | New audit row with your e-mail as `performedBy` |
-| Remove the Editor role collection, try again | 403 from the router (and from the service if called directly) |
+| Open the router URL | Sign-in page → XSUAA login → the device table with your identity and scopes in the sidebar |
+| Row menu → a status transition, enter a reason | The row's audit trail opens with the new entry and your e-mail as `performedBy` |
+| Remove the Editor role collection, sign out and in | Transitions and edit disappear from the row menu; a direct API write returns 403 |
+| Ask the regulation → "What is the capital of France?" | "Not covered by the regulation excerpts available to me." with no citations |
+| Row menu → Review against regulation (OrthoFix bone screw) | A CRITICAL finding citing `eudamed § Registration before placing on the market` |
 | `cf env udi-assistant-srv` | `VCAP_SERVICES.xsuaa[0].credentials` — the binding the service validates tokens against |
 
 ## Regulation assistant (RAG)

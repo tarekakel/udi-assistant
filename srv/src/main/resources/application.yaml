@@ -16,6 +16,10 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  web:
+    resources:
+      # Local development: serve the same UI the approuter serves on BTP (folder is absent in the cloud droplet)
+      static-locations: classpath:/static/, file:../approuter/resources/
   ai:
     openai:
       # Resolved from app.openai.api-key; when that is blank, AssistantKeyEnvironmentPostProcessor installs a placeholder

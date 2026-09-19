@@ -2,9 +2,15 @@
   "welcomeFile": "/index.html",
   "authenticationMethod": "route",
   "logout": {
-    "logoutEndpoint": "/logout"
+    "logoutEndpoint": "/logout",
+    "logoutPage": "/index.html"
   },
   "routes": [
+    {
+      "source": "^/user-api/currentUser$",
+      "service": "sap-approuter-userapi",
+      "authenticationType": "xsuaa"
+    },
     {
       "source": "^/api/assistant/(.*)$",
       "target": "/api/assistant/$1",
@@ -26,15 +32,18 @@
       "csrfProtection": false
     },
     {
-      "source": "^/user-api/currentUser$",
-      "service": "sap-approuter-userapi",
-      "authenticationType": "xsuaa"
+      "source": "^/app/(.*)$",
+      "target": "$1",
+      "localDir": "resources/app",
+      "authenticationType": "xsuaa",
+      "cacheControl": "no-cache"
     },
     {
       "source": "^/(.*)$",
       "target": "$1",
       "localDir": "resources",
-      "authenticationType": "xsuaa"
+      "authenticationType": "none",
+      "cacheControl": "no-cache"
     }
   ]
 }

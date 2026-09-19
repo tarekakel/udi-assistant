@@ -53,9 +53,18 @@ A small, GxP-flavoured master-data service for medical devices identified by UDI
 - A6 The assistant is optional: without an API key the application starts and serves everything else; assistant endpoints return 503 with a problem detail. Tests never call the model provider.
 - A7 The vector index is in-memory for the demo; production would use SAP HANA Cloud Vector Engine or pgvector behind the same `RegulationIndex` interface.
 
-## 8. Roadmap
+## 8. User interface
+- U1 Served by the application router as static files (`approuter/resources`) and by the service locally; no build step.
+- U2 A public sign-in page hands over to XSUAA on BTP; locally it asks for the name to record. No credentials are ever collected by the application itself.
+- U3 Devices page: searchable, filterable, sortable table with column visibility, row selection and CSV export, pagination, and per-row actions (audit trail, review, transitions, edit). Write actions are shown only to users with `Editor`.
+- U4 Every write that needs a reason collects it inline in the table; the application never uses browser dialogs.
+- U5 Further pages: audit trail across all devices (`GET /api/audit-trail`, newest 200), ask the regulation, knowledge sources, about.
+- U6 An expired router session is detected on the next API call and the user is returned to the sign-in page.
+
+## 9. Roadmap
 1. Devices + audit trail — done
 2. XSUAA + approuter, `Viewer` / `Editor` scopes, JWT user strategy — done
 3. "Ask the regulation": RAG over MDR/UDI guidance with citations; device review with structured findings — done
-4. MCP server exposing `findDevice` and `searchRegulation`
-5. One SAPUI5 (TypeScript) view replacing the plain demo page served by the router
+4. Application UI: sign-in, side navigation, data table, audit trail, assistant pages — done
+5. MCP server exposing `findDevice` and `searchRegulation`
+6. SAPUI5 (TypeScript) client for the same API

@@ -3,175 +3,81 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UDI Assistant</title>
+<title>Sign in · UDI Assistant</title>
+<link rel="stylesheet" href="/app/app.css">
 <style>
-  :root { --ink: #16232a; --soft: #5a6a72; --rule: #d5dee0; --accent: #0a6167; --bg: #f2f5f5; --warn: #9a5a0f; }
-  body { margin: 0; padding: 24px 16px; font: 14px/1.5 system-ui, sans-serif; color: var(--ink); background: var(--bg); }
-  main { max-width: 1040px; margin: 0 auto; }
-  h1 { font-size: 22px; margin: 0 0 4px; }
-  .meta { color: var(--soft); margin-bottom: 20px; }
-  .meta b { color: var(--ink); }
-  table { width: 100%; border-collapse: collapse; background: #fff; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
-  th { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--soft); }
-  td.num { font-variant-numeric: tabular-nums; font-family: ui-monospace, monospace; }
-  .pill { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 12px; background: #e0eeee; color: var(--accent); }
-  .pill.WITHDRAWN { background: #eee; color: var(--soft); } .pill.DRAFT { background: #f7ebda; color: var(--warn); }
-  button { font: inherit; padding: 4px 10px; border: 1px solid var(--accent); color: var(--accent); background: #fff; border-radius: 4px; cursor: pointer; }
-  button:hover { background: var(--accent); color: #fff; }
-  button:disabled { opacity: .4; cursor: default; }
-  #trail, #ask, #review { margin-top: 20px; }
-  #trail h2, #ask h2, #review h2 { font-size: 16px; margin: 0 0 8px; }
-  #ask form { display: flex; gap: 8px; flex-wrap: wrap; }
-  #ask input { flex: 1 1 320px; font: inherit; padding: 6px 8px; border: 1px solid var(--rule); border-radius: 4px; }
-  .answer { background: #fff; border: 1px solid var(--rule); padding: 12px; white-space: pre-wrap; margin-top: 8px; }
-  .cite { font-size: 12px; color: var(--soft); margin-top: 6px; }
-  .cite b { color: var(--accent); }
-  .sev { font-weight: 600; } .sev.CRITICAL { color: #a0251f; } .sev.WARN { color: var(--warn); } .sev.INFO { color: var(--accent); }
-  #msg { color: var(--warn); min-height: 1.5em; margin-top: 8px; }
-  .wrap { overflow-x: auto; }
+  .login { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; background:
+    radial-gradient(1200px 600px at 10% -10%, #e0eeee 0%, transparent 60%), var(--bg); }
+  .login-card { width: 100%; max-width: 420px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06); }
+  .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+  .brand .mark { width: 36px; height: 36px; border-radius: 9px; background: var(--accent); color: #fff; display: grid; place-items: center; font-weight: 700; letter-spacing: .02em; }
+  .brand h1 { font-size: 18px; margin: 0; }
+  .brand p { margin: 0; color: var(--muted); font-size: 13px; }
+  .login h2 { font-size: 20px; margin: 0 0 6px; }
+  .login .lead { color: var(--muted); font-size: 14px; margin: 0 0 22px; }
+  .login .btn-primary { width: 100%; justify-content: center; padding: 10px 14px; font-size: 14px; }
+  .login .hint { font-size: 12px; color: var(--muted); margin-top: 16px; line-height: 1.5; }
+  .login label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .login input { width: 100%; margin-bottom: 12px; }
+  .mode { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+  .mode .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+  .mode.btp .dot { background: #16a34a; }
+  .footer { margin-top: 20px; font-size: 12px; color: var(--muted); text-align: center; }
 </style>
 </head>
 <body>
-<main>
-  <h1>UDI Assistant</h1>
-  <div class="meta">Signed in as <b id="user">…</b> · scopes: <span id="scopes">…</span> · <a href="/logout">log out</a></div>
-
-  <div class="wrap">
-    <table>
-      <thead><tr><th>UDI-DI</th><th>Device</th><th>Manufacturer</th><th>Class</th><th>Status</th><th>v</th><th>Next</th><th></th><th></th></tr></thead>
-      <tbody id="rows"></tbody>
-    </table>
-  </div>
-  <div id="msg" role="status"></div>
-
-  <section id="ask">
-    <h2>Ask the regulation</h2>
-    <form id="askForm">
-      <input id="question" placeholder="e.g. What is the difference between UDI-DI and UDI-PI?" maxlength="1000" required>
-      <button type="submit">Ask</button>
-    </form>
-    <div id="answer" hidden></div>
-  </section>
-
-  <section id="review" hidden>
-    <h2>Review — <span id="reviewTitle"></span></h2>
-    <div id="findings"></div>
-  </section>
-
-  <section id="trail" hidden>
-    <h2>Audit trail — <span id="trailTitle"></span></h2>
-    <div class="wrap">
-      <table>
-        <thead><tr><th>When</th><th>Action</th><th>Field</th><th>From</th><th>To</th><th>Reason</th><th>By</th></tr></thead>
-        <tbody id="trailRows"></tbody>
-      </table>
+<main class="login">
+  <div class="login-card">
+    <div class="brand">
+      <div class="mark">UDI</div>
+      <div><h1>UDI Assistant</h1><p>Device master data · audit trail · regulation assistant</p></div>
     </div>
-  </section>
+
+    <div id="checking">
+      <h2>Sign in</h2>
+      <p class="lead">Checking your session…</p>
+    </div>
+
+    <div id="btp" hidden>
+      <div class="mode btp"><span class="dot"></span> SAP BTP · authentication by XSUAA</div>
+      <h2>Sign in</h2>
+      <p class="lead">Use your SAP BTP account. Your identity and role (Viewer or Editor) come from the platform and are recorded in the audit trail.</p>
+      <a class="btn btn-primary" href="/app/index.html">Sign in with SAP BTP</a>
+      <p class="hint">No password is entered here: the platform's identity provider authenticates you and issues a token that the router and the service verify.</p>
+    </div>
+
+    <form id="local" hidden>
+      <div class="mode"><span class="dot"></span> Local development · no identity provider</div>
+      <h2>Continue as</h2>
+      <p class="lead">Running against a local service. Pick the name the audit trail should record for your changes.</p>
+      <label for="name">Your name</label>
+      <input id="name" placeholder="e.g. tarek" maxlength="100" autocomplete="username">
+      <button class="btn btn-primary" type="submit">Continue</button>
+      <p class="hint">On SAP BTP this screen hands over to XSUAA instead; the name is then taken from your token.</p>
+    </form>
+
+    <div class="footer">udi-assistant · Spring Boot 4 on SAP BTP Cloud Foundry</div>
+  </div>
 </main>
-
 <script>
-  const $ = (id) => document.getElementById(id);
-  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-  async function api(path, options) {
-    const res = await fetch(path, { headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, ...options });
-    // An expired approuter session answers with a redirect to the login page; fetch follows it and lands on
-    // 200 + HTML. Reloading the document lets the approuter run the login flow properly.
-    if (res.redirected || !(res.headers.get('content-type') || '').includes('json')) {
-      location.reload();
-      throw new Error('Session expired — signing in again…');
+  const show = (id) => { for (const s of ['checking', 'btp', 'local']) document.getElementById(s).hidden = s !== id; };
+  (async () => {
+    try {
+      const res = await fetch('/user-api/currentUser', { headers: { Accept: 'application/json' } });
+      if (res.ok && (res.headers.get('content-type') || '').includes('json')) { location.replace('/app/index.html'); return; }
+      if (res.status === 404) { show('local'); return; }   // Spring serving the page directly: no approuter, no XSUAA
+      show('btp');                                          // approuter redirected to the identity provider
+    } catch (e) {
+      show('btp');                                          // cross-origin redirect to the IdP blocks fetch: not signed in
     }
-    if (res.status === 403) throw new Error('403 — your role does not allow this (Editor scope required)');
-    if (res.status === 503) throw new Error('503 — the assistant is not configured on this deployment (no OpenAI key bound)');
-    const body = res.status === 204 ? null : await res.json().catch(() => null);
-    if (!res.ok) throw new Error(`${res.status} ${body?.title ?? ''}: ${body?.detail ?? ''}`);
-    return body;
-  }
-
-  async function whoami() {
-    try {
-      const me = await api('/user-api/currentUser');
-      $('user').textContent = me.email || me.name || me.displayName || 'unknown';
-      $('scopes').textContent = (me.scopes || []).filter(s => s.includes('.')).map(s => s.split('.').pop()).join(', ') || 'none';
-    } catch (e) { $('user').textContent = 'unknown'; $('scopes').textContent = '—'; }
-  }
-
-  async function loadDevices() {
-    const page = await api('/api/devices?size=50&sort=name');
-    $('rows').innerHTML = page.content.map(d => `
-      <tr>
-        <td class="num">${esc(d.udiDi)}</td>
-        <td>${esc(d.name)}</td>
-        <td>${esc(d.manufacturer)}</td>
-        <td>${esc(d.riskClass)}</td>
-        <td><span class="pill ${esc(d.registrationStatus)}">${esc(d.registrationStatus)}</span></td>
-        <td class="num">${d.version}</td>
-        <td>${d.allowedTransitions.map(t => `<button data-id="${d.id}" data-status="${t}">${esc(t)}</button>`).join(' ') || '—'}</td>
-        <td><button data-trail="${d.id}" data-name="${esc(d.name)}">trail</button></td>
-        <td><button data-review="${d.id}" data-name="${esc(d.name)}">review</button></td>
-      </tr>`).join('');
-  }
-
-  const citeHtml = (c) => `<div class="cite"><b>[${esc(c.source)} § ${esc(c.section)}]</b> ${esc(c.excerpt).slice(0, 220)}…</div>`;
-
-  async function ask(question) {
-    $('answer').hidden = false;
-    $('answer').innerHTML = '<div class="answer">Thinking…</div>';
-    const a = await api('/api/assistant/ask', { method: 'POST', body: JSON.stringify({ question }) });
-    $('answer').innerHTML = `<div class="answer">${esc(a.answer)}</div>` + a.citations.map(citeHtml).join('')
-      + `<div class="cite">model: ${esc(a.model)} · ${a.citations.length} passage(s) retrieved</div>`;
-  }
-
-  async function review(id, name) {
-    $('review').hidden = false;
-    $('reviewTitle').textContent = name;
-    $('findings').innerHTML = '<div class="answer">Reviewing…</div>';
-    const r = await api(`/api/devices/${id}/review`, { method: 'POST' });
-    const rows = r.findings.length
-      ? r.findings.map(f => `<div class="answer"><span class="sev ${esc(f.severity)}">${esc(f.severity)}</span> · <b>${esc(f.rule)}</b><br>${esc(f.message)}<div class="cite"><b>[${esc(f.source)} § ${esc(f.section)}]</b></div></div>`).join('')
-      : '<div class="answer">No findings supported by the regulation excerpts.</div>';
-    $('findings').innerHTML = rows + `<div class="cite">model: ${esc(r.model)} · passages consulted: ${r.citations.map(c => esc(c.source + ' § ' + c.section)).join('; ')}</div>`;
-  }
-
-  $('askForm').addEventListener('submit', async (ev) => {
+  })();
+  document.getElementById('local').addEventListener('submit', (ev) => {
     ev.preventDefault();
-    $('msg').textContent = '';
-    try { await ask($('question').value.trim()); } catch (e) { $('answer').hidden = true; $('msg').textContent = e.message; }
+    const name = document.getElementById('name').value.trim();
+    if (!name) { document.getElementById('name').focus(); return; }
+    localStorage.setItem('udiUser', name);
+    location.href = '/app/index.html';
   });
-
-  async function showTrail(id, name) {
-    const entries = await api(`/api/devices/${id}/audit-trail`);
-    $('trailTitle').textContent = name;
-    $('trailRows').innerHTML = entries.map(e => `
-      <tr>
-        <td class="num">${esc(new Date(e.performedAt).toLocaleString())}</td>
-        <td>${esc(e.action)}</td>
-        <td>${esc(e.field ?? '')}</td>
-        <td>${esc(e.oldValue ?? '')}</td>
-        <td>${esc(e.newValue ?? '')}</td>
-        <td>${esc(e.reason ?? '')}</td>
-        <td>${esc(e.performedBy)}</td>
-      </tr>`).join('');
-    $('trail').hidden = false;
-  }
-
-  document.addEventListener('click', async (ev) => {
-    const b = ev.target.closest('button'); if (!b) return;
-    $('msg').textContent = '';
-    try {
-      if (b.dataset.trail) return await showTrail(b.dataset.trail, b.dataset.name);
-      if (b.dataset.review) return await review(b.dataset.review, b.dataset.name);
-      const reason = prompt(`Reason for changing status to ${b.dataset.status} (required):`);
-      if (!reason) return;
-      await api(`/api/devices/${b.dataset.id}/status`, { method: 'POST', body: JSON.stringify({ status: b.dataset.status, reason }) });
-      await loadDevices();
-      await showTrail(b.dataset.id, b.closest('tr').children[1].textContent);
-    } catch (e) { $('msg').textContent = e.message; }
-  });
-
-  whoami();
-  loadDevices().catch(e => $('msg').textContent = e.message);
 </script>
 </body>
 </html>
