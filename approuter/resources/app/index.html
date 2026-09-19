@@ -3,38 +3,49 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>UDI Assistant</title>
 <link rel="stylesheet" href="/app/app.css">
+<script>
+  // Apply the saved theme before first paint to avoid a flash.
+  (function () { try { var t = localStorage.getItem('udiTheme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {} })();
+</script>
 </head>
 <body>
-<div class="shell">
+<div class="shell" id="shell">
   <aside class="sidebar" id="sidebar">
     <div class="side-brand">
       <div class="mark">UDI</div>
-      <div><div class="name">UDI Assistant</div><div class="sub">Life-sciences master data</div></div>
+      <div class="label"><div class="name">UDI Assistant</div><div class="sub" data-i18n="brand.sub">Life-sciences master data</div></div>
     </div>
     <nav class="side-nav" id="nav">
-      <a href="#/devices" data-view="devices"><span class="ico">▦</span> Devices</a>
-      <a href="#/audit" data-view="audit"><span class="ico">≡</span> Audit trail</a>
-      <a href="#/ask" data-view="ask"><span class="ico">?</span> Ask the regulation</a>
-      <a href="#/sources" data-view="sources"><span class="ico">§</span> Knowledge sources</a>
-      <a href="#/about" data-view="about"><span class="ico">i</span> About</a>
+      <a href="#/devices" data-view="devices"><span class="ico">▦</span><span class="label" data-i18n="nav.devices">Devices</span></a>
+      <a href="#/audit" data-view="audit"><span class="ico">≡</span><span class="label" data-i18n="nav.audit">Audit trail</span></a>
+      <a href="#/ask" data-view="ask"><span class="ico">?</span><span class="label" data-i18n="nav.ask">Ask the regulation</span></a>
+      <a href="#/sources" data-view="sources"><span class="ico">§</span><span class="label" data-i18n="nav.sources">Knowledge sources</span></a>
+      <a href="#/about" data-view="about"><span class="ico">i</span><span class="label" data-i18n="nav.about">About</span></a>
     </nav>
     <div class="side-user">
-      <div class="avatar" id="avatar">?</div>
-      <div class="who">
+      <div class="avatar" id="avatar" title="">?</div>
+      <div class="who label">
         <div class="email" id="userEmail">…</div>
         <div class="roles" id="userRoles"></div>
       </div>
-      <button class="btn btn-ghost btn-sm" id="logout" title="Log out">Log out</button>
+      <button class="btn btn-ghost btn-sm label" id="logout" data-i18n="logout">Log out</button>
     </div>
   </aside>
 
   <div class="content">
     <header class="topbar">
-      <button class="btn btn-ghost btn-sm menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      <button class="btn btn-ghost btn-icon" id="menuToggle" aria-label="Toggle navigation" title="Toggle navigation">☰</button>
       <div class="crumbs" id="crumbs">Devices</div>
-      <div class="mode-pill" id="modePill"></div>
+      <div class="topbar-right">
+        <div class="mode-pill" id="modePill"></div>
+        <div class="seg" id="langSwitch" role="group" aria-label="Language">
+          <button data-lang="en">EN</button><button data-lang="de">DE</button>
+        </div>
+        <button class="btn btn-ghost btn-icon" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">◐</button>
+      </div>
     </header>
     <div class="notice" id="notice" role="status" hidden></div>
     <main class="view" id="view"></main>
