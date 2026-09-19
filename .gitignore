@@ -14,3 +14,6 @@ approuter/package-lock.json
 
 # Local secrets (also ignored inside srv/)
 .env
+
+# multiapps operation logs downloaded with cf dmol
+mta-op-*/
