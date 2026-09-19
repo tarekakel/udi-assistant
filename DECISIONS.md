@@ -2,6 +2,29 @@
 
 A running log of non-obvious decisions, and of places where a tool, a library, or an AI-generated suggestion was wrong and what was done about it. Newest first.
 
+## 2026-09-19 — MCP server: read-only tools, stateless transport, retrieval split from generation
+
+**Decision.** The service exposes four read-only MCP tools (`findDevice`, `searchDevices`, `getAuditTrail`,
+`searchRegulation`) over Spring AI's MCP server starter, protocol `STATELESS` at `/mcp`. No tool writes.
+
+**Why read-only.** In a GxP context every change to master data needs an accountable person and a reason. An agent
+that can look up, compare and cite is useful; an agent that can transition a device to REGISTERED is a compliance
+finding waiting to happen. If writes are ever wanted, they go through the same service methods with the technical
+client's id in the audit trail — but that is a product decision, not a default.
+
+**Why stateless.** Streamable HTTP with sessions keeps per-client state in the instance's memory; on Cloud Foundry
+that breaks on restart and with more than one instance. The stateless variant makes every request self-contained,
+which is all that tool calls need.
+
+**What broke.** The first wiring made the tool class depend on `AssistantService`, which depends on the
+`ChatClient.Builder`, whose auto-configuration collects every `ToolCallbackProvider` in the context — a bean cycle.
+The fix was better design, not `@Lazy`: retrieval now lives in its own `RegulationRetrieval` service used by both the
+assistant (before it calls the model) and the tools (which return the evidence and stop). Retrieval and generation
+were two responsibilities all along.
+
+**Verified end to end.** A test starts the server on a random port and drives it with the official MCP Java SDK
+client; a security test proves `/mcp` needs a Viewer token on the cloud profile.
+
 ## 2026-09-19 — A framework-free UI served as static files; sign-in delegates to XSUAA
 
 **Decision.** The UI is plain HTML/CSS/JS under `approuter/resources`: the router serves it on BTP, Spring serves the

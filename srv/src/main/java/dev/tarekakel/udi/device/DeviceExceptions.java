@@ -8,6 +8,10 @@ class DeviceNotFoundException extends DomainException {
     DeviceNotFoundException(UUID id) {
         super(HttpStatus.NOT_FOUND, "Device not found", "No device with id " + id);
     }
+
+    DeviceNotFoundException(String udiDi) {
+        super(HttpStatus.NOT_FOUND, "Device not found", "No device with UDI-DI " + udiDi);
+    }
 }
 
 class DuplicateUdiDiException extends DomainException {

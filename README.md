@@ -96,12 +96,61 @@ Models: `gpt-4o-mini` for chat, `text-embedding-3-small` for embeddings (`app.op
 switches the provider (Azure OpenAI, SAP AI Core) without code changes. The vector index is in-memory; production would
 use SAP HANA Cloud Vector Engine or pgvector behind the same `RegulationIndex` interface.
 
+## MCP server: the same data for AI agents
+
+The service is also a [Model Context Protocol](https://modelcontextprotocol.io) server at `/mcp` (stateless streamable
+HTTP). An agent such as Claude Desktop, Cursor or a Spring AI application can call four **read-only** tools:
+
+| Tool | Returns |
+|---|---|
+| `findDevice(udiDi)` | Master data, registration status and the transitions allowed next |
+| `searchDevices(text?, status?, limit?)` | Devices matching free text over UDI-DI, name and manufacturer |
+| `getAuditTrail(udiDi)` | Who changed what, when and why, oldest first |
+| `searchRegulation(question)` | The most relevant regulation passages with source and section, no generated answer |
+
+Agents read and cite; they do not write. Changing regulated master data stays a human action with a recorded reason.
+The tools call the same services as the REST API and return the same JSON shapes, so an error such as an unknown
+UDI-DI comes back as a readable tool error.
+
+**Locally** (service running on port 8080, no token needed), for Claude Desktop add to `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "udi-assistant": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "http://localhost:8080/mcp", "--transport", "http-only"]
+    }
+  }
+}
+```
+
+Then ask, for example: *"Which submitted devices does Hersfeld Biomaterials have, and what does the regulation say
+about labelling them?"* The agent will call `searchDevices` and `searchRegulation` and cite the sections.
+
+**On BTP** the endpoint is protected by XSUAA like the API. An agent is a technical client: create a service key on the
+XSUAA instance, fetch a client-credentials token, and pass it as a bearer header. The token carries the scopes the
+application declares, so `Viewer` is satisfied.
+
+```powershell
+cf create-service-key udi-assistant-uaa mcp-client
+cf service-key udi-assistant-uaa mcp-client      # clientid, clientsecret, url
+$token = (curl -s -u "<clientid>:<clientsecret>" "<url>/oauth/token" -d "grant_type=client_credentials" | ConvertFrom-Json).access_token
+curl -s https://<srv-url>/mcp -H "Authorization: Bearer $token" -H "Content-Type: application/json" `
+     -H "Accept: application/json, text/event-stream" `
+     -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+```
+
+For Claude Desktop against BTP, add `"--header", "Authorization: Bearer ${MCP_TOKEN}"` to the `mcp-remote` arguments
+and put the token in the `env` block of the server entry. A production setup would let `mcp-remote` run the OAuth
+flow against XSUAA instead of pasting a token.
+
 ## Security model
 
 - The approuter authenticates the user with XSUAA (authorization code flow) and checks scopes per HTTP method
   before forwarding; the JWT travels to the service in `Authorization: Bearer`.
 - The service is a stateless resource server: signature via XSUAA's `token_keys`, timestamp checks, an audience check,
-  and the same scope rules again (`GET` → Viewer or Editor, anything else → Editor).
+  and the same scope rules again (`GET` → Viewer or Editor, anything else → Editor; `/mcp` → Viewer or Editor).
 - The authenticated `user_name` becomes the audit-trail user through the `CurrentUserProvider` strategy; locally the
   `X-User` header plays that role.
 
@@ -115,5 +164,6 @@ cd srv
 Unit tests cover the GTIN-14 check digit, the status lifecycle, change detection, scope mapping, the audience check and
 corpus parsing. Integration tests boot the service against H2 for the API and the audit trail, boot the `cloud` profile
 with a stubbed `JwtDecoder` to prove scope enforcement and that the token user lands in the trail, and boot the
-assistant with a stubbed `ChatModel` and index to pin down the prompt contract and citation handling. No test calls
-OpenAI.
+assistant with a stubbed `ChatModel` and index to pin down the prompt contract and citation handling, and connect a
+real MCP client (the official SDK) to the running server over HTTP to check the tool list, results and tool errors.
+No test calls OpenAI.

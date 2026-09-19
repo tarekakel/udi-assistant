@@ -32,6 +32,21 @@ spring:
         options:
           model: ${app.openai.embedding-model}
 
+    mcp:
+      server:
+        name: udi-assistant
+        version: 0.1.0
+        # No server-side session: each request is self-contained, so the service can restart or scale out freely
+        protocol: STATELESS
+        instructions: >-
+          Read-only tools over UDI device master data (findDevice, searchDevices), its audit trail
+          (getAuditTrail) and the regulation excerpts the assistant is grounded in (searchRegulation).
+          Master data is changed by people through the application, never by tools.
+        capabilities:
+          resource: false
+          prompt: false
+          completion: false
+
 management:
   endpoints:
     web:

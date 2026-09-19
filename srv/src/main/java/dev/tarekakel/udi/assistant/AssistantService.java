@@ -15,21 +15,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class AssistantService {
 
-    private final RegulationIndex index;
+    private final RegulationRetrieval retrieval;
     private final ChatClient chat;
     private final DeviceService devices;
     private final AppProperties.OpenAi openAi;
 
-    AssistantService(RegulationIndex index, ChatClient.Builder chatBuilder, DeviceService devices, AppProperties properties) {
-        this.index = index;
+    AssistantService(RegulationRetrieval retrieval, ChatClient.Builder chatBuilder, DeviceService devices, AppProperties properties) {
+        this.retrieval = retrieval;
         this.chat = chatBuilder.defaultSystem(AssistantPrompts.SYSTEM).build();
         this.devices = devices;
         this.openAi = properties.openai();
     }
 
     public Answer ask(String question) {
-        requireConfigured();
-        List<Citation> citations = index.search(question);
+        List<Citation> citations = retrieval.retrieve(question);
         String answer = chat.prompt()
                 .user(user -> user.text(AssistantPrompts.ASK)
                         .param("context", AssistantPrompts.renderContext(citations))
@@ -40,9 +39,8 @@ public class AssistantService {
     }
 
     public Review review(UUID deviceId) {
-        requireConfigured();
         Device device = devices.get(deviceId);
-        List<Citation> citations = index.search(reviewQuery(device));
+        List<Citation> citations = retrieval.retrieve(reviewQuery(device));
         ReviewFindings findings = chat.prompt()
                 .user(user -> user.text(AssistantPrompts.REVIEW)
                         .param("context", AssistantPrompts.renderContext(citations))
@@ -51,12 +49,6 @@ public class AssistantService {
                 .entity(ReviewFindings.class);
         List<Finding> list = findings == null || findings.findings() == null ? List.of() : findings.findings();
         return new Review(device.getId(), device.getUdiDi(), list, citations, openAi.model());
-    }
-
-    private void requireConfigured() {
-        if (!openAi.configured()) {
-            throw new AssistantNotConfiguredException();
-        }
     }
 
     /** What to retrieve for a review: labelling, registration and classification passages for this kind of device. */

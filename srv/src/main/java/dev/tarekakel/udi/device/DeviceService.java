@@ -71,6 +71,17 @@ public class DeviceService {
         return status == null ? devices.findAll(pageable) : devices.findByRegistrationStatus(status, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Device getByUdiDi(String udiDi) {
+        return devices.findByUdiDi(udiDi).orElseThrow(() -> new DeviceNotFoundException(udiDi));
+    }
+
+    /** Free-text search over UDI-DI, name and manufacturer, optionally narrowed to one status. */
+    @Transactional(readOnly = true)
+    public Page<Device> search(String text, RegistrationStatus status, Pageable pageable) {
+        return devices.findAll(DeviceSpecifications.matching(text, status), pageable);
+    }
+
     private Device require(UUID id) {
         return devices.findById(id).orElseThrow(() -> new DeviceNotFoundException(id));
     }

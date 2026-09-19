@@ -53,7 +53,14 @@ A small, GxP-flavoured master-data service for medical devices identified by UDI
 - A6 The assistant is optional: without an API key the application starts and serves everything else; assistant endpoints return 503 with a problem detail. Tests never call the model provider.
 - A7 The vector index is in-memory for the demo; production would use SAP HANA Cloud Vector Engine or pgvector behind the same `RegulationIndex` interface.
 
-## 8. User interface
+## 8. MCP server (agent access)
+- M1 The service is an MCP server (Model Context Protocol) at `POST /mcp`, stateless streamable HTTP: no server-side session, every request self-contained, so instances restart and scale freely.
+- M2 Tools are **read-only**: `findDevice(udiDi)`, `searchDevices(text?, status?, limit?)`, `getAuditTrail(udiDi)`, `searchRegulation(question)`. Agents look up and cite; master data is changed by people through the application, with a reason. No tool creates, updates or transitions a device.
+- M3 Tools call the same application services as the REST API and return the same representations (`DeviceResponse`, `AuditEntryResponse`, `Citation`). A domain error (unknown UDI-DI, assistant not configured) becomes a tool error the agent can read, never a transport failure.
+- M4 `searchRegulation` returns retrieved passages with source and section; it does not generate an answer. The calling agent reasons; the evidence is versioned with the application (A1).
+- M5 On BTP `/mcp` sits behind the same JWT filter as the API and requires `Viewer` or `Editor`. Agents authenticate as a technical client (XSUAA client-credentials from a service key); the client id is what the audit trail would record. Locally the endpoint is open like the rest of the API.
+
+## 9. User interface
 - U1 Served by the application router as static files (`approuter/resources`) and by the service locally; no build step.
 - U2 A public sign-in page hands over to XSUAA on BTP; locally it asks for the name to record. No credentials are ever collected by the application itself.
 - U3 Devices page: searchable, filterable, sortable table with column visibility, row selection and CSV export, pagination, and per-row actions (audit trail, review, transitions, edit). Write actions are shown only to users with `Editor`.
@@ -61,10 +68,10 @@ A small, GxP-flavoured master-data service for medical devices identified by UDI
 - U5 Further pages: audit trail across all devices (`GET /api/audit-trail`, newest 200), ask the regulation, knowledge sources, about.
 - U6 An expired router session is detected on the next API call and the user is returned to the sign-in page.
 
-## 9. Roadmap
+## 10. Roadmap
 1. Devices + audit trail — done
 2. XSUAA + approuter, `Viewer` / `Editor` scopes, JWT user strategy — done
 3. "Ask the regulation": RAG over MDR/UDI guidance with citations; device review with structured findings — done
 4. Application UI: sign-in, side navigation, data table, audit trail, assistant pages — done
-5. MCP server exposing `findDevice` and `searchRegulation`
+5. MCP server: read-only tools over devices, audit trail and regulation retrieval; stateless HTTP; XSUAA technical client on BTP — done
 6. SAPUI5 (TypeScript) client for the same API

@@ -2,6 +2,7 @@ package dev.tarekakel.udi.common.security;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -91,6 +92,20 @@ class CloudSecurityTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].action").value("CREATE"))
                 .andExpect(jsonPath("$[0].performedBy").value("editor@example.com"));
+    }
+
+    @Test
+    void mcpEndpointNeedsAViewerToken() throws Exception {
+        String initialize = """
+                {"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18",
+                 "capabilities":{},"clientInfo":{"name":"test","version":"0"}}}
+                """;
+        mvc.perform(post("/mcp").contentType(APPLICATION_JSON).accept(APPLICATION_JSON, TEXT_EVENT_STREAM).content(initialize))
+                .andExpect(status().isUnauthorized());
+        mvc.perform(post("/mcp").header("Authorization", "Bearer viewer-token")
+                        .contentType(APPLICATION_JSON).accept(APPLICATION_JSON, TEXT_EVENT_STREAM).content(initialize))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result.serverInfo.name").value("udi-assistant"));
     }
 
     private static Jwt token(String user, String... localScopes) {

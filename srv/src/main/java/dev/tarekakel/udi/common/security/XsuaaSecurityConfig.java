@@ -34,6 +34,7 @@ class XsuaaSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/assistant/ask").hasAnyAuthority(Scopes.VIEWER, Scopes.EDITOR)
                         .requestMatchers(HttpMethod.GET, "/api/**").hasAnyAuthority(Scopes.VIEWER, Scopes.EDITOR)
                         .requestMatchers("/api/**").hasAuthority(Scopes.EDITOR)
+                        .requestMatchers("/mcp", "/mcp/**").hasAnyAuthority(Scopes.VIEWER, Scopes.EDITOR)
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(authenticationConverter(xsuaa))));
         return http.build();
