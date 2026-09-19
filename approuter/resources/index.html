@@ -20,8 +20,14 @@
   button { font: inherit; padding: 4px 10px; border: 1px solid var(--accent); color: var(--accent); background: #fff; border-radius: 4px; cursor: pointer; }
   button:hover { background: var(--accent); color: #fff; }
   button:disabled { opacity: .4; cursor: default; }
-  #trail { margin-top: 20px; }
-  #trail h2 { font-size: 16px; margin: 0 0 8px; }
+  #trail, #ask, #review { margin-top: 20px; }
+  #trail h2, #ask h2, #review h2 { font-size: 16px; margin: 0 0 8px; }
+  #ask form { display: flex; gap: 8px; flex-wrap: wrap; }
+  #ask input { flex: 1 1 320px; font: inherit; padding: 6px 8px; border: 1px solid var(--rule); border-radius: 4px; }
+  .answer { background: #fff; border: 1px solid var(--rule); padding: 12px; white-space: pre-wrap; margin-top: 8px; }
+  .cite { font-size: 12px; color: var(--soft); margin-top: 6px; }
+  .cite b { color: var(--accent); }
+  .sev { font-weight: 600; } .sev.CRITICAL { color: #a0251f; } .sev.WARN { color: var(--warn); } .sev.INFO { color: var(--accent); }
   #msg { color: var(--warn); min-height: 1.5em; margin-top: 8px; }
   .wrap { overflow-x: auto; }
 </style>
@@ -33,11 +39,25 @@
 
   <div class="wrap">
     <table>
-      <thead><tr><th>UDI-DI</th><th>Device</th><th>Manufacturer</th><th>Class</th><th>Status</th><th>v</th><th>Next</th><th></th></tr></thead>
+      <thead><tr><th>UDI-DI</th><th>Device</th><th>Manufacturer</th><th>Class</th><th>Status</th><th>v</th><th>Next</th><th></th><th></th></tr></thead>
       <tbody id="rows"></tbody>
     </table>
   </div>
   <div id="msg" role="status"></div>
+
+  <section id="ask">
+    <h2>Ask the regulation</h2>
+    <form id="askForm">
+      <input id="question" placeholder="e.g. What is the difference between UDI-DI and UDI-PI?" maxlength="1000" required>
+      <button type="submit">Ask</button>
+    </form>
+    <div id="answer" hidden></div>
+  </section>
+
+  <section id="review" hidden>
+    <h2>Review — <span id="reviewTitle"></span></h2>
+    <div id="findings"></div>
+  </section>
 
   <section id="trail" hidden>
     <h2>Audit trail — <span id="trailTitle"></span></h2>
@@ -63,6 +83,7 @@
       throw new Error('Session expired — signing in again…');
     }
     if (res.status === 403) throw new Error('403 — your role does not allow this (Editor scope required)');
+    if (res.status === 503) throw new Error('503 — the assistant is not configured on this deployment (no OpenAI key bound)');
     const body = res.status === 204 ? null : await res.json().catch(() => null);
     if (!res.ok) throw new Error(`${res.status} ${body?.title ?? ''}: ${body?.detail ?? ''}`);
     return body;
@@ -88,8 +109,36 @@
         <td class="num">${d.version}</td>
         <td>${d.allowedTransitions.map(t => `<button data-id="${d.id}" data-status="${t}">${esc(t)}</button>`).join(' ') || '—'}</td>
         <td><button data-trail="${d.id}" data-name="${esc(d.name)}">trail</button></td>
+        <td><button data-review="${d.id}" data-name="${esc(d.name)}">review</button></td>
       </tr>`).join('');
   }
+
+  const citeHtml = (c) => `<div class="cite"><b>[${esc(c.source)} § ${esc(c.section)}]</b> ${esc(c.excerpt).slice(0, 220)}…</div>`;
+
+  async function ask(question) {
+    $('answer').hidden = false;
+    $('answer').innerHTML = '<div class="answer">Thinking…</div>';
+    const a = await api('/api/assistant/ask', { method: 'POST', body: JSON.stringify({ question }) });
+    $('answer').innerHTML = `<div class="answer">${esc(a.answer)}</div>` + a.citations.map(citeHtml).join('')
+      + `<div class="cite">model: ${esc(a.model)} · ${a.citations.length} passage(s) retrieved</div>`;
+  }
+
+  async function review(id, name) {
+    $('review').hidden = false;
+    $('reviewTitle').textContent = name;
+    $('findings').innerHTML = '<div class="answer">Reviewing…</div>';
+    const r = await api(`/api/devices/${id}/review`, { method: 'POST' });
+    const rows = r.findings.length
+      ? r.findings.map(f => `<div class="answer"><span class="sev ${esc(f.severity)}">${esc(f.severity)}</span> · <b>${esc(f.rule)}</b><br>${esc(f.message)}<div class="cite"><b>[${esc(f.source)} § ${esc(f.section)}]</b></div></div>`).join('')
+      : '<div class="answer">No findings supported by the regulation excerpts.</div>';
+    $('findings').innerHTML = rows + `<div class="cite">model: ${esc(r.model)} · passages consulted: ${r.citations.map(c => esc(c.source + ' § ' + c.section)).join('; ')}</div>`;
+  }
+
+  $('askForm').addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    $('msg').textContent = '';
+    try { await ask($('question').value.trim()); } catch (e) { $('answer').hidden = true; $('msg').textContent = e.message; }
+  });
 
   async function showTrail(id, name) {
     const entries = await api(`/api/devices/${id}/audit-trail`);
@@ -112,6 +161,7 @@
     $('msg').textContent = '';
     try {
       if (b.dataset.trail) return await showTrail(b.dataset.trail, b.dataset.name);
+      if (b.dataset.review) return await review(b.dataset.review, b.dataset.name);
       const reason = prompt(`Reason for changing status to ${b.dataset.status} (required):`);
       if (!reason) return;
       await api(`/api/devices/${b.dataset.id}/status`, { method: 'POST', body: JSON.stringify({ status: b.dataset.status, reason }) });

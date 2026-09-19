@@ -2,6 +2,40 @@
 
 A running log of non-obvious decisions, and of places where a tool, a library, or an AI-generated suggestion was wrong and what was done about it. Newest first.
 
+## 2026-09-19 — RAG assistant: retrieval decides what the model sees; citations come from metadata
+
+**Decision.** The regulation corpus ships with the application as Markdown (one chunk per section), is embedded
+into an in-memory vector store, and every answer is produced from the retrieved chunks only. The citations in the
+API response are the retrieved chunks themselves (source + section from metadata), not text the model generated.
+The prompt requires a literal "not covered" reply when retrieval finds nothing relevant.
+
+**Why.** In a GxP setting "the model said so" is not acceptable. Grounding the answer in versioned, reviewable text
+and attaching citations from outside the model turns the assistant into something a compliance team can audit:
+what it knew, what it was shown, what it answered.
+
+**Not chosen.** Spring AI's `QuestionAnswerAdvisor` (hidden retrieval, and its module stopped at milestone builds
+for the 2.x line); live web retrieval (un-versioned knowledge); fine-tuning (no audit trail of knowledge).
+
+## 2026-09-19 — Optional AI feature must never block startup: placeholder key via EnvironmentPostProcessor
+
+Spring AI's OpenAI auto-configuration refuses to start with an empty API key, and a YAML default (`${x:fallback}`)
+does not apply to an empty string. An `EnvironmentPostProcessor` installs a placeholder for `spring.ai.openai.api-key`
+when `app.openai.api-key` is blank, while the application's own property stays blank so the assistant answers 503
+"not configured". The rest of the service is unaffected. Warm-up indexing runs in the background after startup and
+a failure there is logged and retried on the first query — a wrong key cannot take the master-data API down.
+
+**Lesson learned on the way.** A stale `OPENAI_API_KEY` in the Windows user environment silently overrode `.env`
+(OS environment beats config imports) and produced 401s from a key nobody had typed recently. Precedence of
+configuration sources is worth stating in the README.
+
+## 2026-09-19 — Tests never call the model provider; one database per test context
+
+`ChatModel` and `RegulationIndex` are stubbed in the assistant tests, which pin down the contract instead: what the
+model is shown (system rules, context, question), how citations travel, how structured output is parsed. A
+test-scope `application.properties` leaves the assistant unconfigured by default. It also gives each Spring test
+context its own H2 database: contexts with different properties share one JVM, and one shared `jdbc:h2:mem:udi`
+let seeded devices from one test collide with another (409 on a duplicate UDI-DI).
+
 ## 2026-09-19 — XSUAA plan visible in the marketplace but not provisionable: re-sync the entitlement
 
 **Symptom.** `cf deploy` failed creating the XSUAA instance: `Service broker error: service plan not found or not

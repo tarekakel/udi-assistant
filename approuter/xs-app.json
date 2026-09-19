@@ -6,6 +6,14 @@
   },
   "routes": [
     {
+      "source": "^/api/assistant/(.*)$",
+      "target": "/api/assistant/$1",
+      "destination": "srv-api",
+      "authenticationType": "xsuaa",
+      "scope": ["$XSAPPNAME.Viewer", "$XSAPPNAME.Editor"],
+      "csrfProtection": false
+    },
+    {
       "source": "^/api/(.*)$",
       "target": "/api/$1",
       "destination": "srv-api",

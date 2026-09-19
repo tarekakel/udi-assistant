@@ -28,6 +28,7 @@ modules:
       build-result: target/udi-assistant-*.jar
     requires:
       - name: udi-assistant-uaa
+      - name: openai
     provides:
       - name: srv-api
         properties:
@@ -52,6 +53,13 @@ modules:
           forwardAuthToken: true
 
 resources:
+  # OpenAI key for the regulation assistant, created once by hand and never stored in this file:
+  #   cf cups openai -p '{"apiKey":"sk-..."}'
+  # Optional: without it the service starts and the assistant endpoints answer 503.
+  - name: openai
+    type: org.cloudfoundry.existing-service
+    optional: true
+
   # One XSUAA instance shared by router and service; scopes and roles come from xs-security.json.
   - name: udi-assistant-uaa
     type: org.cloudfoundry.managed-service

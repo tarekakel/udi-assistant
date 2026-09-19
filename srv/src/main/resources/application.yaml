@@ -16,6 +16,17 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  ai:
+    openai:
+      # Resolved from app.openai.api-key; when that is blank, AssistantKeyEnvironmentPostProcessor installs a placeholder
+      api-key: ${app.openai.api-key}
+      chat:
+        options:
+          model: ${app.openai.model}
+          temperature: 0.1
+      embedding:
+        options:
+          model: ${app.openai.embedding-model}
 
 management:
   endpoints:
@@ -29,8 +40,13 @@ management:
 app:
   seed-data: true
   openai:
-    api-key: ${OPENAI_API_KEY:}
+    # .env locally; on BTP a user-provided service named "openai" with {"apiKey": "..."} bound to the app
+    api-key: ${OPENAI_API_KEY:${vcap.services.openai.credentials.apiKey:}}
     model: ${OPENAI_MODEL:gpt-4o-mini}
+    embedding-model: text-embedding-3-small
+  assistant:
+    top-k: 4
+    similarity-threshold: 0.25
   security:
     xsuaa:
       # Filled from the bound XSUAA instance on Cloud Foundry (VCAP_SERVICES -> vcap.services.* properties).

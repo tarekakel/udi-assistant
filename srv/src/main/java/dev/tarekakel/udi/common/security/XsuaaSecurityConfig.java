@@ -31,6 +31,7 @@ class XsuaaSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/assistant/ask").hasAnyAuthority(Scopes.VIEWER, Scopes.EDITOR)
                         .requestMatchers(HttpMethod.GET, "/api/**").hasAnyAuthority(Scopes.VIEWER, Scopes.EDITOR)
                         .requestMatchers("/api/**").hasAuthority(Scopes.EDITOR)
                         .anyRequest().authenticated())

@@ -44,9 +44,18 @@ A small, GxP-flavoured master-data service for medical devices identified by UDI
 - S5 `/actuator/health` is public; everything else requires a valid token.
 - S6 Locally (no `cloud` profile) the API is open and the user comes from the `X-User` header; that mode never runs on BTP.
 
-## 7. Roadmap
+## 7. Regulation assistant (RAG)
+- A1 The assistant's knowledge is the Markdown corpus under `srv/src/main/resources/regulation/`, versioned with the application. One file per source, one chunk per `##` section. Nothing is fetched at runtime.
+- A2 `POST /api/assistant/ask` retrieves the top-k chunks above a similarity threshold, shows the model **only** those, and returns the answer plus the retrieved chunks as citations. Citations are taken from retrieval metadata, never from the model's text.
+- A3 The model is instructed to cite every statement as `[source § section]` and to answer exactly "Not covered by the regulation excerpts available to me." when the context does not cover the question.
+- A4 `POST /api/devices/{id}/review` retrieves passages relevant to the device's risk class and status and asks the model for structured findings (`severity`, `rule`, `message`, `source`, `section`); each finding must name a passage from the context. Requires `Editor`; `ask` requires `Viewer`.
+- A5 `GET /api/assistant/sources` lists sources and sections so a reviewer can see the boundary of what the assistant can answer.
+- A6 The assistant is optional: without an API key the application starts and serves everything else; assistant endpoints return 503 with a problem detail. Tests never call the model provider.
+- A7 The vector index is in-memory for the demo; production would use SAP HANA Cloud Vector Engine or pgvector behind the same `RegulationIndex` interface.
+
+## 8. Roadmap
 1. Devices + audit trail — done
 2. XSUAA + approuter, `Viewer` / `Editor` scopes, JWT user strategy — done
-3. "Ask the regulation": RAG over MDR/UDI guidance (OpenAI, in-memory vector store; HANA Cloud Vector Engine in prod)
+3. "Ask the regulation": RAG over MDR/UDI guidance with citations; device review with structured findings — done
 4. MCP server exposing `findDevice` and `searchRegulation`
 5. One SAPUI5 (TypeScript) view replacing the plain demo page served by the router
