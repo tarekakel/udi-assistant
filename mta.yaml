@@ -14,7 +14,7 @@ modules:
     parameters:
       buildpack: java_buildpack
       memory: 1024M
-      disk-quota: 512M
+      disk-quota: 1024M      # JRE + ~140 MB jar (Spring AI); 512 MB is too tight
     properties:
       SPRING_PROFILES_ACTIVE: cloud
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
