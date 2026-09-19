@@ -4,8 +4,8 @@ A small, GxP-flavoured master-data service for medical devices identified by UDI
 Built to demonstrate end-to-end engineering on one stack: Java 17 / Spring Boot 4 / JPA / SQL, XSUAA security behind an
 application router, an AI assistant (RAG), MCP integration, a SAPUI5 (TypeScript) client and SAP HANA Cloud persistence.
 
-The specification in [SPEC.md](SPEC.md) is the source of truth; [DECISIONS.md](DECISIONS.md) records the non-obvious choices
-and the places where tooling or generated code was wrong.
+The specification in [SPEC.md](SPEC.md) is the source of truth; [ARCHITECTURE.md](ARCHITECTURE.md) maps every part and the
+main sequences; [DECISIONS.md](DECISIONS.md) records the non-obvious choices and the places where tooling or generated code was wrong.
 
 ## Layout
 
