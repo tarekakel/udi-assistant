@@ -25,6 +25,12 @@ were two responsibilities all along.
 **Verified end to end.** A test starts the server on a random port and drives it with the official MCP Java SDK
 client; a security test proves `/mcp` needs a Viewer token on the cloud profile.
 
+**Lesson on the technical client.** The first client-credentials token from the XSUAA service key carried only
+`uaa.resource`: XSUAA does not hand an application's scopes to its own technical client by default. The scopes a
+technical client gets are the ones listed under `authorities` in `xs-security.json`; `$XSAPPNAME.Viewer` is now
+granted there and nothing else, so an agent can read on BTP and the identity provider itself rules out writes
+(`POST /api/devices` with the technical token answers 403). Verified live after `cf update-service ... -c xs-security.json`.
+
 ## 2026-09-19 — A framework-free UI served as static files; sign-in delegates to XSUAA
 
 **Decision.** The UI is plain HTML/CSS/JS under `approuter/resources`: the router serves it on BTP, Spring serves the

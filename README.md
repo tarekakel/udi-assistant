@@ -129,8 +129,9 @@ Then ask, for example: *"Which submitted devices does Hersfeld Biomaterials have
 about labelling them?"* The agent will call `searchDevices` and `searchRegulation` and cite the sections.
 
 **On BTP** the endpoint is protected by XSUAA like the API. An agent is a technical client: create a service key on the
-XSUAA instance, fetch a client-credentials token, and pass it as a bearer header. The token carries the scopes the
-application declares, so `Viewer` is satisfied.
+XSUAA instance, fetch a client-credentials token, and pass it as a bearer header. A client-credentials token contains
+only the scopes listed under `authorities` in `xs-security.json` (here `$XSAPPNAME.Viewer`), never the user roles, so
+an agent can read but the platform itself guarantees it cannot write.
 
 ```powershell
 cf create-service-key udi-assistant-uaa mcp-client
