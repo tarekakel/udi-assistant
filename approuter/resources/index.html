@@ -55,7 +55,13 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
   async function api(path, options) {
-    const res = await fetch(path, { headers: { 'Content-Type': 'application/json' }, ...options });
+    const res = await fetch(path, { headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, ...options });
+    // An expired approuter session answers with a redirect to the login page; fetch follows it and lands on
+    // 200 + HTML. Reloading the document lets the approuter run the login flow properly.
+    if (res.redirected || !(res.headers.get('content-type') || '').includes('json')) {
+      location.reload();
+      throw new Error('Session expired — signing in again…');
+    }
     if (res.status === 403) throw new Error('403 — your role does not allow this (Editor scope required)');
     const body = res.status === 204 ? null : await res.json().catch(() => null);
     if (!res.ok) throw new Error(`${res.status} ${body?.title ?? ''}: ${body?.detail ?? ''}`);

@@ -40,6 +40,8 @@ modules:
     parameters:
       memory: 256M
       disk-quota: 256M
+    properties:
+      SESSION_TIMEOUT: 60          # minutes of inactivity before re-login; default 15 is short for a demo
     requires:
       - name: udi-assistant-uaa
       - name: srv-api
