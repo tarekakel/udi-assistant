@@ -2,6 +2,41 @@
 
 A running log of non-obvious decisions, and of places where a tool, a library, or an AI-generated suggestion was wrong and what was done about it. Newest first.
 
+## 2026-09-19 — SAP HANA Cloud instead of PostgreSQL; one migration set per database
+
+**Context.** The plan said "PostgreSQL on BTP" for persistence. The trial marketplace offers no PostgreSQL at all
+(`hana`, `hana-cloud`, `abap-trial` only); the hyperscaler PostgreSQL service is not part of trial accounts.
+
+**Decision.** Persist on SAP HANA Cloud (free tier, `hdi-shared` schema) whenever the `udi-assistant-db` service is
+bound; the datasource properties fall back to in-memory H2 otherwise, so local runs, tests and a cloud deployment
+without HANA all work from one configuration, and `/actuator/health` says which database is live. Flyway reads `db/migration/{vendor}`, so `h2/V1` and `hana/V1` are two flavours
+of the same schema (column tables, `NVARCHAR`, plain `TIMESTAMP` on HANA). Entity ids are mapped with
+`@JdbcTypeCode(SqlTypes.VARCHAR)`, i.e. `VARCHAR(36)` everywhere, instead of leaning on a vendor UUID type.
+
+**Why not something else.** A file-based H2 on the instance disk is lost on restage anyway. HANA Cloud is also the
+database the target stack runs on, so the migration flavour and the driver are worth having in the repository.
+
+**Caveat.** The first `cf create-service hana-cloud hana-free` failed with *service plan not found or not
+accessible* — the same entitlement drift seen with XSUAA (see below). The entitlement must be added or re-saved in
+the Cockpit first; the trial also stops the database nightly, so it must be started before a demo. The resource
+is `optional` in `mta.yaml`, so the archive deploys and runs on H2 until the schema exists.
+
+## 2026-09-19 — SAPUI5 client in TypeScript, built by the MTA into the approuter
+
+**Decision.** The second UI is a real SAPUI5 application (`ui5/`, TypeScript, `ui5-tooling-transpile`) rather
+than a UI5 flavour of the static page. The MTA declares it as an `html5` module with `supported-platforms: []`
+and copies its build result into the approuter's `resources/ui5`, so the router serves it next to the plain UI
+behind the same XSUAA route. No HTML5 Application Repository, no Launchpad service: two fewer entitlements on a
+trial and one less moving part for a demo, at the price of not having the repository's caching and versioning.
+
+**Shape.** One `BaseController` owns what every controller needs (router, texts, dialogs, error display); the REST
+client is a typed module that maps RFC 9457 problem details to messages; the session model (mode, user, scopes)
+is resolved once in the component and drives `visible` bindings, mirroring the plain UI's rules. Language and theme
+share the plain UI's `localStorage` keys so the two clients agree.
+
+**Lesson.** `ui5 build` warns when `sap.app.i18n` is a plain path and the bundle has no `en` file: declare
+`supportedLocales` and `fallbackLocale: ""` there as well, not only on the model.
+
 ## 2026-09-19 — MCP server: read-only tools, stateless transport, retrieval split from generation
 
 **Decision.** The service exposes four read-only MCP tools (`findDevice`, `searchDevices`, `getAuditTrail`,

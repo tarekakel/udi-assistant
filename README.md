@@ -2,7 +2,7 @@
 
 A small, GxP-flavoured master-data service for medical devices identified by UDI-DI, running on **SAP BTP (Cloud Foundry)**.
 Built to demonstrate end-to-end engineering on one stack: Java 17 / Spring Boot 4 / JPA / SQL, XSUAA security behind an
-application router, an AI assistant (RAG) and MCP integration.
+application router, an AI assistant (RAG), MCP integration, a SAPUI5 (TypeScript) client and SAP HANA Cloud persistence.
 
 The specification in [SPEC.md](SPEC.md) is the source of truth; [DECISIONS.md](DECISIONS.md) records the non-obvious choices
 and the places where tooling or generated code was wrong.
@@ -11,10 +11,11 @@ and the places where tooling or generated code was wrong.
 
 ```
 udi-assistant/
-  mta.yaml            multitarget application: service + router + XSUAA instance
-  xs-security.json    scopes (Viewer, Editor), role templates, role collections
+  mta.yaml            multitarget application: service + router + UI5 client + XSUAA + HANA schema
+  xs-security.json    scopes (Viewer, Editor), role templates, role collections, technical-client authorities
   srv/                Spring Boot service (Java 17)
-  approuter/          @sap/approuter: login, per-method scope checks, JWT forwarding, demo page
+  approuter/          @sap/approuter: login, per-method scope checks, JWT forwarding; serves both UIs
+  ui5/                SAPUI5 client in TypeScript (built into approuter/resources/ui5 by the MTA build)
 ```
 
 ## Run locally
@@ -29,6 +30,8 @@ cd srv
   a name; it is sent as `X-User` and recorded in the audit trail.
 - API: http://localhost:8080/api/devices (20 seeded devices with lifecycle history)
 - Audit trail: http://localhost:8080/api/audit-trail (all devices, newest first) and `/api/devices/{id}/audit-trail`
+- **SAPUI5 client:** http://localhost:8080/ui5/index.html after building it once:
+  `cd ui5 && npm install && npm run build:local` (writes into `approuter/resources/ui5`, which Spring serves)
 - H2 console: http://localhost:8080/h2-console (JDBC URL `jdbc:h2:mem:udi`, user `sa`, no password)
 - Health: http://localhost:8080/actuator/health
 
@@ -48,11 +51,29 @@ files and Spring serves the same files locally.
 | Knowledge sources | The corpus the assistant can cite, by source and section. |
 | About | What the project demonstrates, the stack, and the current session (mode, user, scopes). |
 
-A SAPUI5 (TypeScript) client for the same API is the planned next UI step.
+### SAPUI5 client (TypeScript)
+
+`ui5/` holds a second client for the same API, written in TypeScript on SAPUI5 1.148 (Horizon theme, `sap.f` dynamic
+page, `sap.uxap` object page). It is reachable from the side navigation of the plain UI and directly at `/ui5/index.html`.
+
+| Page | What it does |
+|---|---|
+| Devices | Server-side search over UDI-DI, name and manufacturer (`GET /api/devices?search=`), status filter, responsive table with popins, navigation to the detail page, "New device" dialog for editors. |
+| Device | Object page: master data, the lifecycle steps allowed next as buttons, edit dialog with record version (stale edits are refused by the service), and the audit trail. Every write asks for a reason in the dialog. |
+
+Structure: `Component.ts` resolves the session (XSUAA user on BTP, name from the sign-in page locally) into a JSON
+model that the views bind `visible` to; `model/ApiClient.ts` is the typed REST client that turns RFC 9457 problem
+details into readable errors; controllers extend one `BaseController` (router, texts, dialogs, error display);
+views are XML with fragments for the three dialogs; `i18n` has English and German. Language and theme follow the
+same `localStorage` keys as the plain UI, so switching in one client switches the other.
+
+Build: `ui5 build` with `ui5-tooling-transpile` (TypeScript → UI5 AMD modules, `Component-preload.js`). The MTA build
+runs it as an `html5` module whose result is copied into the approuter (`resources/ui5`), so there is no HTML5
+application repository to provision. For development, `npm start` serves the app with live transpilation.
 
 ## Deploy to SAP BTP
 
-Prerequisites: JDK 17+, Maven 3.9+ and Node 20+ on the PATH; [cf CLI](https://github.com/cloudfoundry/cli/releases)
+Prerequisites: JDK 17+, Maven 3.9+ and Node 20+ on the PATH (the MTA build also runs `npm ci` for the UI5 client); [cf CLI](https://github.com/cloudfoundry/cli/releases)
 with `cf install-plugin multiapps`; `npm install -g mbt` (on Windows `mbt` also needs GNU make, e.g.
 `winget install GnuWin32.Make`, and `C:\Program Files (x86)\GnuWin32\bin` on the PATH); `cf login` targeting a space.
 
@@ -60,6 +81,19 @@ with `cf install-plugin multiapps`; `npm install -g mbt` (on Windows `mbt` also 
 mbt build
 cf deploy mta_archives\udi-assistant_0.1.0.mtar
 ```
+
+**Database.** Locally and in tests the service runs on in-memory H2. On BTP it uses a schema on **SAP HANA Cloud**
+(service `hana`, plan `hdi-shared`, instance `udi-assistant-db` from `mta.yaml`) as soon as that service is bound:
+the binding decides, `/actuator/health` names the database in use. The schema needs a running HANA Cloud instance
+mapped to the space; on a trial account:
+
+1. Cockpit → Entitlements → add **SAP HANA Cloud** (`hana-free`) and **SAP HANA Schemas & HDI Containers** (`hdi-shared`).
+2. Create the database in the space (about ten minutes; the trial stops it every night, start it before a demo):
+   `cf create-service hana-cloud hana-free udi-assistant-hana -c '{"data":{"edition":"cloud","systempassword":"<strong password>","whitelistIPs":["0.0.0.0/0"]}}'`
+3. `cf deploy` as above; the HDI container is created and the Flyway migrations under `db/migration/hana` run.
+
+The resource is marked `optional` in `mta.yaml`: without HANA the same archive deploys and runs on H2, re-seeding
+on every restart.
 
 Then, once per user, in the BTP Cockpit: **Security → Users → your user → Assign Role Collection →**
 `udi-assistant-Editor` (or `udi-assistant-Viewer`). Open the approuter route printed by `cf apps`.

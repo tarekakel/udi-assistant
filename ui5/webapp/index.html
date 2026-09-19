@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UDI Assistant · SAPUI5</title>
+<script>
+  // Share language and theme with the sign-in page and the plain UI (same localStorage keys).
+  (function () {
+    var lang, dark;
+    try { lang = localStorage.getItem("udiLang"); dark = localStorage.getItem("udiTheme") === "dark"; } catch (e) { /* storage blocked */ }
+    if (!dark && !lang) { dark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches; }
+    window["sap-ui-config"] = { language: lang || undefined, theme: dark ? "sap_horizon_dark" : "sap_horizon" };
+  })();
+</script>
+<script id="sap-ui-bootstrap"
+        src="https://ui5.sap.com/1.148.10/resources/sap-ui-core.js"
+        data-sap-ui-async="true"
+        data-sap-ui-compat-version="edge"
+        data-sap-ui-resource-roots='{"udi.ui5": "./"}'
+        data-sap-ui-on-init="module:sap/ui/core/ComponentSupport"></script>
+</head>
+<body class="sapUiBody" id="content">
+<div data-sap-ui-component data-name="udi.ui5" data-id="container" data-settings='{"id": "udi.ui5"}' data-height="100%"></div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form">
+    <Dialog id="StatusDialog" title="{form>/title}" contentWidth="30rem" draggable="true">
+        <form:SimpleForm editable="true" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">
+            <Label text="{i18n>form.reason}" required="true"/>
+            <TextArea value="{form>/reason}" rows="3" maxLength="500" growing="true" placeholder="{i18n>form.reasonPlaceholder}" width="100%"/>
+        </form:SimpleForm>
+        <beginButton>
+            <Button text="{i18n>form.confirm}" type="Emphasized" press=".onConfirmStatus" enabled="{= !!${form>/reason} }"/>
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>form.cancel}" press=".onCloseDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

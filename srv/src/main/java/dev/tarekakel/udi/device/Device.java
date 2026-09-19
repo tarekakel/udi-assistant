@@ -14,6 +14,8 @@ import java.time.Instant;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -30,6 +32,7 @@ public class Device {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @JdbcTypeCode(SqlTypes.VARCHAR)   // VARCHAR(36) everywhere: H2 and SAP HANA agree, no vendor UUID type
     private UUID id;
 
     @Column(name = "udi_di", nullable = false, updatable = false, unique = true, length = 14)

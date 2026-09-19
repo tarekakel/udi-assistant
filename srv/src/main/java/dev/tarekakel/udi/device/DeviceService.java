@@ -67,11 +67,6 @@ public class DeviceService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Device> list(RegistrationStatus status, Pageable pageable) {
-        return status == null ? devices.findAll(pageable) : devices.findByRegistrationStatus(status, pageable);
-    }
-
-    @Transactional(readOnly = true)
     public Device getByUdiDi(String udiDi) {
         return devices.findByUdiDi(udiDi).orElseThrow(() -> new DeviceNotFoundException(udiDi));
     }

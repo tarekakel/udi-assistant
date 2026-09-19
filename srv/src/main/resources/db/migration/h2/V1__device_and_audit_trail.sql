@@ -1,6 +1,6 @@
 -- Devices identified by UDI-DI (GTIN-14). Records are never deleted; WITHDRAWN is the terminal status.
 CREATE TABLE device (
-    id                  UUID                        NOT NULL,
+    id                  VARCHAR(36)                        NOT NULL,
     udi_di              VARCHAR(14)                 NOT NULL,
     name                VARCHAR(200)                NOT NULL,
     manufacturer        VARCHAR(200)                NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE device (
 
 -- Append-only audit trail: who changed what, when, and why (ALCOA+).
 CREATE TABLE audit_entry (
-    id           UUID                        NOT NULL,
+    id           VARCHAR(36)                        NOT NULL,
     entity_type  VARCHAR(50)                 NOT NULL,
     entity_id    VARCHAR(64)                 NOT NULL,
     action       VARCHAR(20)                 NOT NULL,

@@ -1,0 +1,76 @@
+<mvc:View
+    controllerName="udi.ui5.controller.Devices"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+    height="100%">
+    <f:DynamicPage id="devicesPage" headerExpanded="true" busy="{devices>/busy}" busyIndicatorDelay="300" class="sapUiNoContentPadding">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>devices.title} ({devices>/count})"/>
+                </f:heading>
+                <f:snappedContent>
+                    <Text text="{i18n>devices.subtitle}"/>
+                </f:snappedContent>
+                <f:expandedContent>
+                    <Text text="{i18n>devices.subtitle}"/>
+                </f:expandedContent>
+                <f:actions>
+                    <Button text="{i18n>devices.new}" icon="sap-icon://add" type="Emphasized" press=".onNewDevice" visible="{session>/canEdit}"/>
+                    <Button icon="sap-icon://refresh" tooltip="{i18n>devices.refresh}" press=".onSearch"/>
+                </f:actions>
+                <f:navigationActions>
+                    <ObjectStatus text="{= ${session>/mode} === 'btp' ? ${i18n>session.btp} : ${i18n>session.local} }" icon="sap-icon://person-placeholder" state="Information" class="sapUiTinyMarginEnd"/>
+                    <ObjectStatus text="{session>/user}" state="None"/>
+                </f:navigationActions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="false">
+                <HBox wrap="Wrap" alignItems="End" class="sapUiTinyGap">
+                    <VBox>
+                        <Label text="{i18n>devices.search}" labelFor="search"/>
+                        <SearchField id="search" width="20rem" value="{devices>/search}" placeholder="{i18n>devices.searchPlaceholder}" search=".onSearch"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginBegin">
+                        <Label text="{i18n>device.status}" labelFor="statusFilter"/>
+                        <Select id="statusFilter" selectedKey="{devices>/status}" change=".onSearch" width="14rem">
+                            <core:Item key="" text="{i18n>devices.allStatuses}"/>
+                            <core:Item key="DRAFT" text="{i18n>status.DRAFT}"/>
+                            <core:Item key="SUBMITTED" text="{i18n>status.SUBMITTED}"/>
+                            <core:Item key="REGISTERED" text="{i18n>status.REGISTERED}"/>
+                            <core:Item key="WITHDRAWN" text="{i18n>status.WITHDRAWN}"/>
+                        </Select>
+                    </VBox>
+                </HBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table id="devicesTable" items="{devices>/items}" sticky="ColumnHeaders" growing="true" growingThreshold="50" noDataText="{i18n>devices.noData}">
+                <columns>
+                    <Column width="11rem"><Text text="{i18n>device.udiDi}"/></Column>
+                    <Column><Text text="{i18n>device.name}"/></Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="{i18n>device.manufacturer}"/></Column>
+                    <Column width="6rem" hAlign="Center" minScreenWidth="Tablet" demandPopin="true"><Text text="{i18n>device.riskClass}"/></Column>
+                    <Column width="9rem"><Text text="{i18n>device.status}"/></Column>
+                    <Column width="12rem" minScreenWidth="Desktop" demandPopin="true"><Text text="{i18n>device.updated}"/></Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation" press=".onItemPress">
+                        <cells>
+                            <ObjectIdentifier title="{devices>udiDi}"/>
+                            <Text text="{devices>name}"/>
+                            <Text text="{devices>manufacturer}"/>
+                            <Text text="{path: 'devices>riskClass', formatter: '.formatter.riskClass'}"/>
+                            <ObjectStatus text="{path: 'devices>registrationStatus', formatter: '.statusText'}" state="{path: 'devices>registrationStatus', formatter: '.formatter.statusState'}" inverted="true"/>
+                            <Text text="{path: 'devices>updatedAt', formatter: '.formatter.dateTime'}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

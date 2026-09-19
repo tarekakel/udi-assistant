@@ -1,0 +1,104 @@
+{
+  "_version": "1.60.0",
+  "sap.app": {
+    "id": "udi.ui5",
+    "type": "application",
+    "i18n": {
+      "bundleUrl": "i18n/i18n.properties",
+      "supportedLocales": [
+        "",
+        "de"
+      ],
+      "fallbackLocale": ""
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "0.1.0"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "udi.ui5.view.App",
+      "type": "XML",
+      "id": "app",
+      "async": true
+    },
+    "dependencies": {
+      "minUI5Version": "1.148.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.f": {},
+        "sap.uxap": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "udi.ui5.i18n.i18n",
+          "supportedLocales": [
+            "",
+            "de"
+          ],
+          "fallbackLocale": ""
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "type": "View",
+        "viewType": "XML",
+        "path": "udi.ui5.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "async": true,
+        "transition": "slide"
+      },
+      "routes": [
+        {
+          "name": "devices",
+          "pattern": "",
+          "target": "devices"
+        },
+        {
+          "name": "device",
+          "pattern": "device/{id}",
+          "target": "device"
+        }
+      ],
+      "targets": {
+        "devices": {
+          "name": "Devices",
+          "id": "devices"
+        },
+        "device": {
+          "name": "Device",
+          "id": "device"
+        }
+      }
+    }
+  }
+}

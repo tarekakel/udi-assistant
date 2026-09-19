@@ -5,13 +5,19 @@ spring:
   config:
     import: optional:file:.env[.properties]
   datasource:
-    url: jdbc:h2:mem:udi;DB_CLOSE_DELAY=-1
-    username: sa
-    password: ""
+    # The binding decides: with the "udi-assistant-db" SAP HANA Cloud schema bound (BTP) its credentials are used;
+    # otherwise (local runs, tests, a cloud deployment without HANA) the service runs on in-memory H2.
+    # /actuator/health names the database in use.
+    url: ${vcap.services.udi-assistant-db.credentials.url:jdbc:h2:mem:udi;DB_CLOSE_DELAY=-1}
+    username: ${vcap.services.udi-assistant-db.credentials.user:sa}
+    password: ${vcap.services.udi-assistant-db.credentials.password:}
   jpa:
     open-in-view: false
     hibernate:
       ddl-auto: validate   # schema is owned by Flyway; Hibernate only checks it matches the entities
+  flyway:
+    # One migration set per database: db/migration/h2 (local, tests) and db/migration/hana (BTP)
+    locations: classpath:db/migration/{vendor}
   h2:
     console:
       enabled: true

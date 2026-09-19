@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 /**
  * One immutable line of the audit trail (who / when / what / why). No setters and an append-only repository
@@ -21,6 +23,7 @@ public class AuditEntry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @JdbcTypeCode(SqlTypes.VARCHAR)   // VARCHAR(36) everywhere: H2 and SAP HANA agree, no vendor UUID type
     private UUID id;
 
     @Column(name = "entity_type", nullable = false, updatable = false, length = 50)

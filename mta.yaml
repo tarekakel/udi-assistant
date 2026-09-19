@@ -29,6 +29,7 @@ modules:
     requires:
       - name: udi-assistant-uaa
       - name: openai
+      - name: udi-assistant-db
     provides:
       - name: srv-api
         properties:
@@ -43,6 +44,13 @@ modules:
       disk-quota: 256M
     properties:
       SESSION_TIMEOUT: 60          # minutes of inactivity before re-login; default 15 is short for a demo
+    build-parameters:
+      # the SAPUI5 client is built first and copied into the router's static resources
+      requires:
+        - name: udi-assistant-ui5
+          artifacts:
+            - "./*"
+          target-path: resources/ui5/
     requires:
       - name: udi-assistant-uaa
       - name: srv-api
@@ -52,6 +60,18 @@ modules:
           url: ~{srv-url}
           forwardAuthToken: true
 
+  # SAPUI5 (TypeScript) client: built by the MTA build and served by the approuter from resources/ui5
+  - name: udi-assistant-ui5
+    type: html5
+    path: ui5
+    build-parameters:
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      build-result: dist
+      supported-platforms: []
+
 resources:
   # OpenAI key for the regulation assistant, created once by hand and never stored in this file:
   #   cf cups openai -p '{"apiKey":"sk-..."}'
@@ -59,6 +79,15 @@ resources:
   - name: openai
     type: org.cloudfoundry.existing-service
     optional: true
+
+  # SAP HANA Cloud schema (needs a running HANA Cloud instance mapped to this space; free tier on trial).
+  # Optional: when it cannot be created the service starts on in-memory H2 instead (the binding decides).
+  - name: udi-assistant-db
+    type: org.cloudfoundry.managed-service
+    optional: true
+    parameters:
+      service: hana
+      service-plan: hdi-shared
 
   # One XSUAA instance shared by router and service; scopes and roles come from xs-security.json.
   - name: udi-assistant-uaa

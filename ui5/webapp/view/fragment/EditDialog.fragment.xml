@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form">
+    <Dialog id="EditDialog" title="{form>/title}" contentWidth="32rem" draggable="true">
+        <form:SimpleForm editable="true" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">
+            <Label text="{i18n>device.name}" required="true"/>
+            <Input value="{form>/name}" maxLength="200"/>
+            <Label text="{i18n>device.manufacturer}" required="true"/>
+            <Input value="{form>/manufacturer}" maxLength="200"/>
+            <Label text="{i18n>device.riskClass}"/>
+            <Select selectedKey="{form>/riskClass}">
+                <core:Item key="I" text="I"/>
+                <core:Item key="IIA" text="IIa"/>
+                <core:Item key="IIB" text="IIb"/>
+                <core:Item key="III" text="III"/>
+            </Select>
+            <Label text="{i18n>form.reason}" required="true"/>
+            <TextArea value="{form>/reason}" rows="3" maxLength="500" growing="true" placeholder="{i18n>form.reasonPlaceholder}" width="100%"/>
+        </form:SimpleForm>
+        <beginButton>
+            <Button text="{i18n>form.save}" type="Emphasized" press=".onSaveEdit" enabled="{= !!${form>/reason} &amp;&amp; !!${form>/name} &amp;&amp; !!${form>/manufacturer} }"/>
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>form.cancel}" press=".onCloseDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

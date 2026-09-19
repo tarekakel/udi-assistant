@@ -34,9 +34,10 @@ class DeviceController {
     }
 
     @GetMapping
-    PagedModel<DeviceResponse> list(@RequestParam(required = false) RegistrationStatus status,
+    PagedModel<DeviceResponse> list(@RequestParam(required = false) String search,
+                                    @RequestParam(required = false) RegistrationStatus status,
                                     @PageableDefault(size = 20, sort = "name") Pageable pageable) {
-        return new PagedModel<>(devices.list(status, pageable).map(DeviceResponse::from));
+        return new PagedModel<>(devices.search(search, status, pageable).map(DeviceResponse::from));
     }
 
     @GetMapping("/{id}")

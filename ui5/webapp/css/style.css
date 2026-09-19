@@ -1,0 +1,3 @@
+/* Small touches only: the Horizon theme does the rest. */
+.sapUiTinyGap > * { margin-bottom: 0.25rem; }
+.sapUiSmallGap > * { margin-bottom: 0.5rem; }

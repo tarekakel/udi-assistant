@@ -6,6 +6,10 @@ mta_archives/
 # Node
 approuter/node_modules/
 approuter/package-lock.json
+ui5/node_modules/
+ui5/dist/
+# SAPUI5 client build output (built by mbt / npm run build:local)
+approuter/resources/ui5/
 
 # IDE
 .idea/

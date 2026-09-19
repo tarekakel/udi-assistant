@@ -1,0 +1,109 @@
+<mvc:View
+    controllerName="udi.ui5.controller.Device"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:form="sap.ui.layout.form"
+    displayBlock="true"
+    height="100%">
+    <uxap:ObjectPageLayout id="devicePage" showTitleInHeaderContent="true" upperCaseAnchorBar="false" busy="{device>/busy}" busyIndicatorDelay="300">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:breadcrumbs>
+                    <Breadcrumbs currentLocationText="{device>/device/udiDi}">
+                        <Link text="{i18n>devices.title}" press=".onNavBack"/>
+                    </Breadcrumbs>
+                </uxap:breadcrumbs>
+                <uxap:expandedHeading>
+                    <Title text="{device>/device/name}" wrapping="true"/>
+                </uxap:expandedHeading>
+                <uxap:snappedHeading>
+                    <Title text="{device>/device/name}"/>
+                </uxap:snappedHeading>
+                <uxap:expandedContent>
+                    <Text text="{device>/device/manufacturer}"/>
+                </uxap:expandedContent>
+                <uxap:snappedContent>
+                    <ObjectStatus text="{path: 'device>/device/registrationStatus', formatter: '.statusText'}" state="{path: 'device>/device/registrationStatus', formatter: '.formatter.statusState'}" inverted="true"/>
+                </uxap:snappedContent>
+                <uxap:actions>
+                    <Button text="{i18n>device.edit}" icon="sap-icon://edit" press=".onEdit" visible="{= ${session>/canEdit} &amp;&amp; ${device>/device/registrationStatus} !== 'WITHDRAWN' }"/>
+                </uxap:actions>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+        <uxap:headerContent>
+            <HBox wrap="Wrap" class="sapUiSmallGap">
+                <VBox class="sapUiLargeMarginEnd">
+                    <Label text="{i18n>device.status}"/>
+                    <ObjectStatus text="{path: 'device>/device/registrationStatus', formatter: '.statusText'}" state="{path: 'device>/device/registrationStatus', formatter: '.formatter.statusState'}" inverted="true" class="sapUiTinyMarginTop"/>
+                </VBox>
+                <VBox class="sapUiLargeMarginEnd">
+                    <Label text="{i18n>device.riskClass}"/>
+                    <Text text="{path: 'device>/device/riskClass', formatter: '.formatter.riskClass'}" class="sapUiTinyMarginTop"/>
+                </VBox>
+                <VBox class="sapUiLargeMarginEnd">
+                    <Label text="{i18n>device.version}"/>
+                    <Text text="{device>/device/version}" class="sapUiTinyMarginTop"/>
+                </VBox>
+                <VBox visible="{session>/canEdit}">
+                    <Label text="{i18n>device.transitions}"/>
+                    <HBox items="{device>/device/allowedTransitions}" class="sapUiTinyMarginTop">
+                        <Button text="{path: 'device>', formatter: '.transitionText'}" press=".onTransition" class="sapUiTinyMarginEnd"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+        </uxap:headerContent>
+        <uxap:sections>
+            <uxap:ObjectPageSection titleUppercase="false" title="{i18n>device.details}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <form:SimpleForm editable="false" layout="ColumnLayout" columnsM="2" columnsL="2" columnsXL="3">
+                            <Label text="{i18n>device.udiDi}"/>
+                            <Text text="{device>/device/udiDi}"/>
+                            <Label text="{i18n>device.name}"/>
+                            <Text text="{device>/device/name}"/>
+                            <Label text="{i18n>device.manufacturer}"/>
+                            <Text text="{device>/device/manufacturer}"/>
+                            <Label text="{i18n>device.riskClass}"/>
+                            <Text text="{path: 'device>/device/riskClass', formatter: '.formatter.riskClass'}"/>
+                            <Label text="{i18n>device.created}"/>
+                            <Text text="{path: 'device>/device/createdAt', formatter: '.formatter.dateTime'} · {device>/device/createdBy}"/>
+                            <Label text="{i18n>device.updated}"/>
+                            <Text text="{path: 'device>/device/updatedAt', formatter: '.formatter.dateTime'} · {device>/device/updatedBy}"/>
+                        </form:SimpleForm>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            <uxap:ObjectPageSection titleUppercase="false" title="{i18n>device.trail}">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection>
+                        <Table items="{device>/trail}" noDataText="{i18n>trail.noData}">
+                            <columns>
+                                <Column width="11rem"><Text text="{i18n>trail.when}"/></Column>
+                                <Column width="10rem" minScreenWidth="Tablet" demandPopin="true"><Text text="{i18n>trail.who}"/></Column>
+                                <Column width="8rem"><Text text="{i18n>trail.action}"/></Column>
+                                <Column width="8rem" minScreenWidth="Tablet" demandPopin="true"><Text text="{i18n>trail.field}"/></Column>
+                                <Column minScreenWidth="Tablet" demandPopin="true"><Text text="{i18n>trail.old}"/></Column>
+                                <Column><Text text="{i18n>trail.new}"/></Column>
+                                <Column minScreenWidth="Desktop" demandPopin="true"><Text text="{i18n>trail.reason}"/></Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="{path: 'device>performedAt', formatter: '.formatter.dateTime'}"/>
+                                        <Text text="{device>performedBy}"/>
+                                        <ObjectStatus text="{device>action}" state="{= ${device>action} === 'CREATE' ? 'Success' : ${device>action} === 'STATUS_CHANGE' ? 'Warning' : 'Information' }"/>
+                                        <Text text="{path: 'device>field', formatter: '.formatter.valueOrDash'}"/>
+                                        <Text text="{path: 'device>oldValue', formatter: '.formatter.valueOrDash'}"/>
+                                        <Text text="{path: 'device>newValue', formatter: '.formatter.valueOrDash'}"/>
+                                        <Text text="{path: 'device>reason', formatter: '.formatter.valueOrDash'}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>

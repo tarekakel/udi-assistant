@@ -23,7 +23,7 @@ A small, GxP-flavoured master-data service for medical devices identified by UDI
 ## 4. API (`/api`)
 | Method | Path | Body | Result |
 |---|---|---|---|
-| GET | `/devices?status=&page=&size=&sort=` | – | page of devices |
+| GET | `/devices?search=&status=&page=&size=&sort=` | – | page of devices; `search` matches UDI-DI, name, manufacturer (case-insensitive) |
 | GET | `/devices/{id}` | – | device incl. `allowedTransitions` |
 | POST | `/devices` | udiDi, name, manufacturer, riskClass | 201 + Location |
 | PUT | `/devices/{id}` | name, manufacturer, riskClass, version, reason | 200 |
@@ -32,7 +32,7 @@ A small, GxP-flavoured master-data service for medical devices identified by UDI
 
 ## 5. Non-functional
 - Schema owned by Flyway migrations; Hibernate validates, never generates.
-- H2 in-memory for local/demo; PostgreSQL or SAP HANA Cloud in production (same migrations).
+- H2 in-memory locally and in tests; SAP HANA Cloud on BTP when the `udi-assistant-db` schema is bound (the binding decides; health names the database). One Flyway migration set per database under `db/migration/{vendor}`; identifiers are stored as `VARCHAR(36)` on every database so entities need no vendor-specific type.
 - `/actuator/health` for platform health checks.
 - Secrets via `.env` locally (git-ignored), environment / user-provided service on BTP.
 
@@ -67,6 +67,7 @@ A small, GxP-flavoured master-data service for medical devices identified by UDI
 - U4 Every write that needs a reason collects it inline in the table; the application never uses browser dialogs.
 - U5 Further pages: audit trail across all devices (`GET /api/audit-trail`, newest 200), ask the regulation, knowledge sources, about.
 - U6 An expired router session is detected on the next API call and the user is returned to the sign-in page.
+- U7 A SAPUI5 (TypeScript) client at `/ui5/` offers the device list (server-side search and status filter) and an object page (master data, next lifecycle steps, edit with record version, audit trail). Writes ask for a reason in a dialog; editor-only actions are hidden without `Editor`; language and theme are shared with the plain UI.
 
 ## 10. Roadmap
 1. Devices + audit trail — done
@@ -74,4 +75,5 @@ A small, GxP-flavoured master-data service for medical devices identified by UDI
 3. "Ask the regulation": RAG over MDR/UDI guidance with citations; device review with structured findings — done
 4. Application UI: sign-in, side navigation, data table, audit trail, assistant pages — done
 5. MCP server: read-only tools over devices, audit trail and regulation retrieval; stateless HTTP; XSUAA technical client on BTP — done
-6. SAPUI5 (TypeScript) client for the same API
+6. SAPUI5 (TypeScript) client for the same API — done
+7. SAP HANA Cloud persistence on BTP (bound schema, vendor migrations) — code done; instance provisioning on the trial pending the entitlement

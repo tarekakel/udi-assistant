@@ -32,6 +32,13 @@
       "csrfProtection": false
     },
     {
+      "source": "^/ui5/(.*)$",
+      "target": "$1",
+      "localDir": "resources/ui5",
+      "authenticationType": "xsuaa",
+      "cacheControl": "no-cache"
+    },
+    {
       "source": "^/app/(.*)$",
       "target": "$1",
       "localDir": "resources/app",

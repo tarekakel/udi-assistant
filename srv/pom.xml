@@ -80,6 +80,19 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<!-- SAP HANA Cloud on BTP (profile "hana"); H2 stays the default for local runs and tests -->
+			<groupId>com.sap.cloud.db.jdbc</groupId>
+			<artifactId>ngdbc</artifactId>
+			<version>2.30.11</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-database-saphana</artifactId>
+			<version>${flyway.version}</version>
+			<scope>runtime</scope>
+		</dependency>
 		<!-- Boot 4 ships the H2 web console as its own module; local/demo only -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

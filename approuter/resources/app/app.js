@@ -10,7 +10,7 @@
   const I18N = {
     en: {
       'brand.sub': 'Life-sciences master data',
-      'nav.devices': 'Devices', 'nav.audit': 'Audit trail', 'nav.ask': 'Ask the regulation', 'nav.sources': 'Knowledge sources', 'nav.about': 'About',
+      'nav.devices': 'Devices', 'nav.audit': 'Audit trail', 'nav.ask': 'Ask the regulation', 'nav.sources': 'Knowledge sources', 'nav.about': 'About', 'nav.ui5': 'SAPUI5 client',
       logout: 'Log out', 'mode.btp': 'SAP BTP · XSUAA', 'mode.local': 'Local · no IdP', 'theme.toggle': 'Switch light / dark', 'nav.toggle': 'Collapse or expand navigation', 'roles.none': 'no roles',
       'devices.sub': '{n} UDI-DI records · every change is recorded in the audit trail with a reason',
       'devices.new': '+ New device', close: 'Close', 'search.ph': 'Search UDI-DI, device, manufacturer',
@@ -47,7 +47,7 @@
     },
     de: {
       'brand.sub': 'Life-Sciences-Stammdaten',
-      'nav.devices': 'Geräte', 'nav.audit': 'Audit-Trail', 'nav.ask': 'Regulierung fragen', 'nav.sources': 'Wissensquellen', 'nav.about': 'Über',
+      'nav.devices': 'Geräte', 'nav.audit': 'Audit-Trail', 'nav.ask': 'Regulierung fragen', 'nav.sources': 'Wissensquellen', 'nav.about': 'Über', 'nav.ui5': 'SAPUI5-Client',
       logout: 'Abmelden', 'mode.btp': 'SAP BTP · XSUAA', 'mode.local': 'Lokal · kein IdP', 'theme.toggle': 'Hell / dunkel umschalten', 'nav.toggle': 'Navigation ein- oder ausklappen', 'roles.none': 'keine Rollen',
       'devices.sub': '{n} UDI-DI-Datensätze · jede Änderung wird mit Begründung im Audit-Trail erfasst',
       'devices.new': '+ Neues Gerät', close: 'Schließen', 'search.ph': 'UDI-DI, Gerät, Hersteller suchen',
