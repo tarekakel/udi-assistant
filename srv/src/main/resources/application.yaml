@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: udi-assistant
+  # Local secrets live in .env (git-ignored). On BTP the same keys arrive as environment variables.
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: jdbc:h2:mem:udi;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate   # schema is owned by Flyway; Hibernate only checks it matches the entities
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+app:
+  seed-data: true
+  openai:
+    api-key: ${OPENAI_API_KEY:}
+    model: ${OPENAI_MODEL:gpt-4o-mini}
+  security:
+    xsuaa:
+      # Filled from the bound XSUAA instance on Cloud Foundry (VCAP_SERVICES -> vcap.services.* properties).
+      # Empty locally, where the default profile runs without OAuth.
+      url: ${vcap.services.udi-assistant-uaa.credentials.url:}
+      xsappname: ${vcap.services.udi-assistant-uaa.credentials.xsappname:}
+      client-id: ${vcap.services.udi-assistant-uaa.credentials.clientid:}
+
+---
+# Cloud Foundry: JWT security on, developer conveniences off.
+spring:
+  config:
+    activate:
+      on-profile: cloud
+  h2:
+    console:
+      enabled: false

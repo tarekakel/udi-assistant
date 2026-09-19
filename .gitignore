@@ -1,0 +1,16 @@
+# MTA build output
+mta_archives/
+.mta/
+*.mtar
+
+# Node
+approuter/node_modules/
+approuter/package-lock.json
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Local secrets (also ignored inside srv/)
+.env

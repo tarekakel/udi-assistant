@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UDI Assistant</title>
+<style>
+  :root { --ink: #16232a; --soft: #5a6a72; --rule: #d5dee0; --accent: #0a6167; --bg: #f2f5f5; --warn: #9a5a0f; }
+  body { margin: 0; padding: 24px 16px; font: 14px/1.5 system-ui, sans-serif; color: var(--ink); background: var(--bg); }
+  main { max-width: 1040px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .meta { color: var(--soft); margin-bottom: 20px; }
+  .meta b { color: var(--ink); }
+  table { width: 100%; border-collapse: collapse; background: #fff; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--soft); }
+  td.num { font-variant-numeric: tabular-nums; font-family: ui-monospace, monospace; }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 12px; background: #e0eeee; color: var(--accent); }
+  .pill.WITHDRAWN { background: #eee; color: var(--soft); } .pill.DRAFT { background: #f7ebda; color: var(--warn); }
+  button { font: inherit; padding: 4px 10px; border: 1px solid var(--accent); color: var(--accent); background: #fff; border-radius: 4px; cursor: pointer; }
+  button:hover { background: var(--accent); color: #fff; }
+  button:disabled { opacity: .4; cursor: default; }
+  #trail { margin-top: 20px; }
+  #trail h2 { font-size: 16px; margin: 0 0 8px; }
+  #msg { color: var(--warn); min-height: 1.5em; margin-top: 8px; }
+  .wrap { overflow-x: auto; }
+</style>
+</head>
+<body>
+<main>
+  <h1>UDI Assistant</h1>
+  <div class="meta">Signed in as <b id="user">…</b> · scopes: <span id="scopes">…</span> · <a href="/logout">log out</a></div>
+
+  <div class="wrap">
+    <table>
+      <thead><tr><th>UDI-DI</th><th>Device</th><th>Manufacturer</th><th>Class</th><th>Status</th><th>v</th><th>Next</th><th></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <div id="msg" role="status"></div>
+
+  <section id="trail" hidden>
+    <h2>Audit trail — <span id="trailTitle"></span></h2>
+    <div class="wrap">
+      <table>
+        <thead><tr><th>When</th><th>Action</th><th>Field</th><th>From</th><th>To</th><th>Reason</th><th>By</th></tr></thead>
+        <tbody id="trailRows"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  async function api(path, options) {
+    const res = await fetch(path, { headers: { 'Content-Type': 'application/json' }, ...options });
+    if (res.status === 403) throw new Error('403 — your role does not allow this (Editor scope required)');
+    const body = res.status === 204 ? null : await res.json().catch(() => null);
+    if (!res.ok) throw new Error(`${res.status} ${body?.title ?? ''}: ${body?.detail ?? ''}`);
+    return body;
+  }
+
+  async function whoami() {
+    try {
+      const me = await api('/user-api/currentUser');
+      $('user').textContent = me.email || me.name || me.displayName || 'unknown';
+      $('scopes').textContent = (me.scopes || []).filter(s => s.includes('.')).map(s => s.split('.').pop()).join(', ') || 'none';
+    } catch (e) { $('user').textContent = 'unknown'; $('scopes').textContent = '—'; }
+  }
+
+  async function loadDevices() {
+    const page = await api('/api/devices?size=50&sort=name');
+    $('rows').innerHTML = page.content.map(d => `
+      <tr>
+        <td class="num">${esc(d.udiDi)}</td>
+        <td>${esc(d.name)}</td>
+        <td>${esc(d.manufacturer)}</td>
+        <td>${esc(d.riskClass)}</td>
+        <td><span class="pill ${esc(d.registrationStatus)}">${esc(d.registrationStatus)}</span></td>
+        <td class="num">${d.version}</td>
+        <td>${d.allowedTransitions.map(t => `<button data-id="${d.id}" data-status="${t}">${esc(t)}</button>`).join(' ') || '—'}</td>
+        <td><button data-trail="${d.id}" data-name="${esc(d.name)}">trail</button></td>
+      </tr>`).join('');
+  }
+
+  async function showTrail(id, name) {
+    const entries = await api(`/api/devices/${id}/audit-trail`);
+    $('trailTitle').textContent = name;
+    $('trailRows').innerHTML = entries.map(e => `
+      <tr>
+        <td class="num">${esc(new Date(e.performedAt).toLocaleString())}</td>
+        <td>${esc(e.action)}</td>
+        <td>${esc(e.field ?? '')}</td>
+        <td>${esc(e.oldValue ?? '')}</td>
+        <td>${esc(e.newValue ?? '')}</td>
+        <td>${esc(e.reason ?? '')}</td>
+        <td>${esc(e.performedBy)}</td>
+      </tr>`).join('');
+    $('trail').hidden = false;
+  }
+
+  document.addEventListener('click', async (ev) => {
+    const b = ev.target.closest('button'); if (!b) return;
+    $('msg').textContent = '';
+    try {
+      if (b.dataset.trail) return await showTrail(b.dataset.trail, b.dataset.name);
+      const reason = prompt(`Reason for changing status to ${b.dataset.status} (required):`);
+      if (!reason) return;
+      await api(`/api/devices/${b.dataset.id}/status`, { method: 'POST', body: JSON.stringify({ status: b.dataset.status, reason }) });
+      await loadDevices();
+      await showTrail(b.dataset.id, b.closest('tr').children[1].textContent);
+    } catch (e) { $('msg').textContent = e.message; }
+  });
+
+  whoami();
+  loadDevices().catch(e => $('msg').textContent = e.message);
+</script>
+</body>
+</html>

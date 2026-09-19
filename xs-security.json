@@ -1,0 +1,37 @@
+{
+  "xsappname": "udi-assistant",
+  "tenant-mode": "dedicated",
+  "description": "UDI Assistant - device master data with audit trail",
+  "scopes": [
+    { "name": "$XSAPPNAME.Viewer", "description": "Read devices and their audit trail" },
+    { "name": "$XSAPPNAME.Editor", "description": "Create devices, change details and registration status" }
+  ],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "Read-only access to device master data",
+      "scope-references": ["$XSAPPNAME.Viewer"]
+    },
+    {
+      "name": "Editor",
+      "description": "Read and write access to device master data",
+      "scope-references": ["$XSAPPNAME.Viewer", "$XSAPPNAME.Editor"]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "udi-assistant-Viewer",
+      "description": "UDI Assistant: view devices",
+      "role-template-references": ["$XSAPPNAME.Viewer"]
+    },
+    {
+      "name": "udi-assistant-Editor",
+      "description": "UDI Assistant: edit devices",
+      "role-template-references": ["$XSAPPNAME.Editor"]
+    }
+  ],
+  "oauth2-configuration": {
+    "redirect-uris": ["https://*.cfapps.ap21.hana.ondemand.com/**"],
+    "token-validity": 3600
+  }
+}

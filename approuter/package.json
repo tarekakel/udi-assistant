@@ -1,0 +1,15 @@
+{
+  "name": "udi-assistant-approuter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Edge router for udi-assistant: XSUAA login, per-method scope checks, JWT forwarding to the service",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@sap/approuter": "^23.0.0"
+  },
+  "scripts": {
+    "start": "node node_modules/@sap/approuter/approuter.js"
+  }
+}

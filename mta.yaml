@@ -1,0 +1,59 @@
+_schema-version: "3.3"
+ID: udi-assistant
+version: 0.1.0
+description: GxP-flavoured UDI master-data service with audit trail, XSUAA security, RAG assistant and MCP
+
+parameters:
+  enable-parallel-deployments: true
+
+modules:
+  # ---- Spring Boot service -------------------------------------------------------------------
+  - name: udi-assistant-srv
+    type: java
+    path: srv
+    parameters:
+      buildpack: java_buildpack
+      memory: 1024M
+      disk-quota: 512M
+    properties:
+      SPRING_PROFILES_ACTIVE: cloud
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
+      # The buildpack's auto-configuration frameworks are switched off: java-cfenv bundles a Micrometer
+      # class that clashes with Spring Boot 4, and Spring Auto Reconfiguration is deprecated. Bindings
+      # are read explicitly by the application instead (see DECISIONS.md).
+      JBP_CONFIG_JAVA_CF_ENV: '{ enabled: false }'
+      JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'
+    build-parameters:
+      builder: maven                          # runs `mvn -B package`; needs Maven 3.9+ on the PATH
+      build-result: target/udi-assistant-*.jar
+    requires:
+      - name: udi-assistant-uaa
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+
+  # ---- Application router: login, scope checks at the edge, token forwarding ----------------
+  - name: udi-assistant-approuter
+    type: nodejs
+    path: approuter
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: udi-assistant-uaa
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          url: ~{srv-url}
+          forwardAuthToken: true
+
+resources:
+  # One XSUAA instance shared by router and service; scopes and roles come from xs-security.json.
+  - name: udi-assistant-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
