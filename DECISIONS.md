@@ -2,6 +2,25 @@
 
 A running log of non-obvious decisions, and of places where a tool, a library, or an AI-generated suggestion was wrong and what was done about it. Newest first.
 
+## 2026-09-19 — XSUAA plan visible in the marketplace but not provisionable: re-sync the entitlement
+
+**Symptom.** `cf deploy` failed creating the XSUAA instance: `Service broker error: service plan not found or not
+accessible`. `cf marketplace -e xsuaa` listed the `application` plan; the Cockpit showed the entitlement assigned with
+one unit; creating the instance from the Cockpit failed with the same message; `xs-security.json` was not involved
+(a bare `cf create-service xsuaa application probe` failed too).
+
+**Cause.** The Cloud Foundry org held a stale plan mapping: `cf marketplace` reflects what the broker advertises to the
+region, while `provision` is checked against the subaccount entitlement as the org knows it. In this trial subaccount
+the two had drifted apart.
+
+**Fix.** Cockpit → Entitlements → remove the `application` plan → Save → add it back → Save. About a minute later
+`cf create-service` succeeded and the deployment went through. The descriptor now also lists redirect URIs for the
+`us10` trial region so the same archive can be deployed there if a region is ever the problem.
+
+**Lesson.** On BTP, "the plan is in the marketplace" and "the org may provision the plan" are two different facts.
+When the broker says *not accessible* and the entitlement looks right, re-saving the entitlement is the first thing
+to try, before rebuilding anything.
+
 ## 2026-09-19 — Standard `maven` builder in mta.yaml; real Maven and GNU make on Windows
 
 **Symptom.** `mbt build` on Windows failed three different ways: `make` not found; then `mvnw.cmd` not found although

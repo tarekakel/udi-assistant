@@ -1,0 +1,1342 @@
+#2026 09 19 08:12:13.046#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#http-nio-0.0.0.0-8080-exec-6#
+[XS2StartProcessListener] Operation ID: d1a58a9a-b401-11f1-ab01-eeee0a8ce143#
+#2026 09 19 08:12:13.089#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#http-nio-0.0.0.0-8080-exec-6#
+[XS2StartProcessListener] Process environment: {
+  "SKIP_SSL_VALIDATION" : "false",
+  "FLOWABLE_JOB_EXECUTOR_MAX_THREADS" : "32",
+  "VERSION" : "2.54.1",
+  "BASIC_AUTH_ENABLED" : "true",
+  "FLOWABLE_JOB_EXECUTOR_QUEUE_CAPACITY" : "16",
+  "FLOWABLE_JOB_EXECUTOR_CORE_THREADS" : "8"
+}#
+#2026 09 19 08:12:13.089#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#http-nio-0.0.0.0-8080-exec-6#
+[XS2StartProcessListener] Current user: thetarekakel@gmail.com#
+#2026 09 19 08:12:13.089#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#http-nio-0.0.0.0-8080-exec-6#
+[XS2StartProcessListener] Client space: dev#
+#2026 09 19 08:12:13.089#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#http-nio-0.0.0.0-8080-exec-6#
+[XS2StartProcessListener] Client organization: 5d04c7c6trial#
+#2026 09 19 08:12:13.089#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#http-nio-0.0.0.0-8080-exec-6#
+[XS2StartProcessListener] Process variables: {
+  "keepFiles" : false,
+  "skipAppDigestCalculation" : false,
+  "abortOnError" : false,
+  "mtaId" : "udi-assistant",
+  "noFailOnMissingPermissions" : false,
+  "isSecurityEnabled" : false,
+  "apiRequestPath" : "https://deploy-service.cf.ap21.hana.ondemand.com/api/v1/spaces/68c6bbeb-241c-4249-99ae-030661cbfa1a/operations",
+  "deleteServiceBrokers" : false,
+  "appArchiveId" : "55716b94-dd34-4d86-8506-5d4c92912539",
+  "isDisposableUserProvidedServiceEnabled" : false,
+  "deleteServiceKeys" : false,
+  "noRestartSubscribedApps" : false,
+  "noStart" : false,
+  "deleteServices" : false
+}#
+#2026 09 19 08:12:13.849#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5090#
+[ValidateDeployParametersStep] Executing task "validateParametersTask" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:13.849#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5090#
+[ValidateDeployParametersStep] Validating parameters...#
+#2026 09 19 08:12:13.851#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5090#
+[ValidateDeployParametersStep] Size of mtars is 62,555,064 and size of extension descriptors is 0#
+#2026 09 19 08:12:14.031#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5090#
+[ValidateDeployParametersStep] Archive was not split! Total size in bytes: 62,555,064#
+#2026 09 19 08:12:14.031#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5090#
+[ValidateDeployParametersStep] Deploying in org "5d04c7c6trial" and space "dev"#
+#2026 09 19 08:12:14.040#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5090#
+[ValidateDeployParametersStep] Parameters validated#
+#2026 09 19 08:12:14.040#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5090#
+Step "Validate Parameters" finished#
+#2026 09 19 08:12:14.087#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5091#
+[DeleteRemainingFileParts] Executing task "deleteRemainingFileParts" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:14.088#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5091#
+Step "Delete Remaining File Parts" finished#
+#2026 09 19 08:12:14.124#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5092#
+[XS2ProcessMtaArchiveStep] Executing task "processArchiveTask" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:14.125#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5092#
+[XS2ProcessMtaArchiveStep] Processing MTA archive...#
+#2026 09 19 08:12:14.125#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5092#
+[XS2ProcessMtaArchiveStep] MTA Archive ID: 55716b94-dd34-4d86-8506-5d4c92912539#
+#2026 09 19 08:12:22.115#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5092#
+[XS2ProcessMtaArchiveStep] MTA Descriptor length: 1,194#
+#2026 09 19 08:12:22.115#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5092#
+[XS2ProcessMtaArchiveStep] MTA Archive Modules: [udi-assistant-srv, udi-assistant-approuter]#
+#2026 09 19 08:12:22.115#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5092#
+[XS2ProcessMtaArchiveStep] MTA Archive Requires: []#
+#2026 09 19 08:12:22.115#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5092#
+[XS2ProcessMtaArchiveStep] MTA Archive Resources: [udi-assistant-uaa]#
+#2026 09 19 08:12:22.132#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5092#
+[XS2ProcessMtaArchiveStep] MTA archive processed#
+#2026 09 19 08:12:22.132#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5092#
+Step "Process Archive" finished#
+#2026 09 19 08:12:22.184#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5093#
+[ProcessMtaExtensionDescriptorsStep] Executing task "processExtensionDescriptorsTask" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:22.185#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5093#
+[ProcessMtaExtensionDescriptorsStep] Processing MTA extension descriptors...#
+#2026 09 19 08:12:22.186#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5093#
+[ProcessMtaExtensionDescriptorsStep] Provided extension descriptors: [ ]#
+#2026 09 19 08:12:22.186#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5093#
+[ProcessMtaExtensionDescriptorsStep] No extension descriptors in use#
+#2026 09 19 08:12:22.186#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5093#
+[ProcessMtaExtensionDescriptorsStep] MTA extension descriptors processed#
+#2026 09 19 08:12:22.186#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5093#
+Step "Process Extension Descriptors" finished#
+#2026 09 19 08:12:22.235#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2DetectMtaSchemaVersionStep] Executing task "detectSchemaVersionTask" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:22.236#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2DetectMtaSchemaVersionStep] Detecting MTA major schema version...#
+#2026 09 19 08:12:22.237#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2DetectMtaSchemaVersionStep] Detected MTA schema version: "3"#
+#2026 09 19 08:12:22.249#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+Step "Detect Schema Version" finished#
+#2026 09 19 08:12:22.292#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[MergeDescriptorsStep] Executing task "mergeDescriptorsTask" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:22.293#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[MergeDescriptorsStep] Validating and merging descriptors...#
+#2026 09 19 08:12:22.295#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[MergeDescriptorsStep] Merged deployment descriptor: {
+  "majorSchemaVersion" : 3,
+  "schemaVersion" : "3.3.0",
+  "id" : "udi-assistant",
+  "version" : "0.1.0",
+  "modules" : [ {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-srv",
+    "type" : "java.tomcat",
+    "path" : "udi-assistant-srv",
+    "properties" : {
+      "JBP_CONFIG_OPEN_JDK_JRE" : "{ jre: { version: 17.+ } }",
+      "JBP_CONFIG_SPRING_AUTO_RECONFIGURATION" : "{ enabled: false }",
+      "JBP_CONFIG_JAVA_CF_ENV" : "{ enabled: false }",
+      "SPRING_PROFILES_ACTIVE" : "cloud"
+    },
+    "parameters" : {
+      "buildpack" : "java_buildpack",
+      "disk-quota" : "512M",
+      "memory" : "1024M"
+    },
+    "requiredDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-uaa",
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "providedDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "srv-api",
+      "isPublic" : false,
+      "properties" : {
+        "srv-url" : "${default-url}"
+      },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    }, {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-srv",
+      "isPublic" : false,
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    },
+    "hooks" : [ ]
+  }, {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-approuter",
+    "type" : "javascript.nodejs",
+    "path" : "udi-assistant-approuter",
+    "properties" : { },
+    "parameters" : {
+      "disk-quota" : "256M",
+      "memory" : "256M"
+    },
+    "requiredDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-uaa",
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    }, {
+      "majorSchemaVersion" : 3,
+      "name" : "srv-api",
+      "group" : "destinations",
+      "properties" : {
+        "name" : "srv-api",
+        "forwardAuthToken" : "********",
+        "url" : "~{srv-url}"
+      },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "providedDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-approuter",
+      "isPublic" : false,
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    },
+    "hooks" : [ ]
+  } ],
+  "resources" : [ {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-uaa",
+    "type" : "org.cloudfoundry.managed-service",
+    "properties" : { },
+    "parameters" : {
+      "path" : "./xs-security.json",
+      "service-plan" : "application",
+      "type" : "managed-service",
+      "service" : "xsuaa"
+    },
+    "isActive" : true,
+    "isOptional" : false,
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    },
+    "requiredDependencies" : [ ],
+    "processedAfter" : [ ]
+  } ],
+  "parameters" : {
+    "enable-parallel-deployments" : true
+  },
+  "parametersMetadata" : {
+    "metadata" : { }
+  }
+}#
+#2026 09 19 08:12:22.296#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[MergeDescriptorsStep] Descriptors validated and merged#
+#2026 09 19 08:12:22.296#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+Step "Merge Descriptors" finished#
+#2026 09 19 08:12:22.344#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5098#
+[CollectCloudLoggingServiceParametersStep] Executing task "sid-9C5714DF-CEC8-4019-8873-CBBA99AC459A" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:22.346#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5098#
+Step "Collect Cloud Logging Service Parameters" finished#
+#2026 09 19 08:12:22.383#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[DetectDeployedMtaStep] Executing task "detectDeployedMtaTask" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:22.384#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[DetectDeployedMtaStep] Detecting deployed MTA...#
+#2026 09 19 08:12:22.446#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[DetectDeployedMtaStep] Detecting MTA by id udi-assistant and namespace null#
+#2026 09 19 08:12:22.446#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[DetectDeployedMtaStep] Getting applications by metadata label selector "mta_id=a331fe94078b819c6f486a224c8ecc83,!mta_namespace"...#
+#2026 09 19 08:12:22.490#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[DetectDeployedMtaStep] Getting service instances by metadata label selector "mta_id=a331fe94078b819c6f486a224c8ecc83,!mta_namespace"...#
+#2026 09 19 08:12:22.584#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[DetectDeployedMtaStep] Deployed MTA: {
+  "metadata" : {
+    "id" : "udi-assistant",
+    "version" : "0.1.0"
+  },
+  "applications" : [ ],
+  "services" : [ {
+    "name" : "udi-assistant-uaa",
+    "metadata" : {
+      "guid" : "7ae81cce-3684-4102-a8cd-937438dabd42",
+      "createdAt" : [ 2026, 9, 19, 8, 9, 16 ],
+      "updatedAt" : [ 2026, 9, 19, 8, 9, 16 ]
+    },
+    "v3Metadata" : {
+      "annotations" : {
+        "mta_id" : "udi-assistant",
+        "mta_version" : "0.1.0",
+        "mta_resource" : "{\"name\":\"udi-assistant-uaa\"}"
+      },
+      "labels" : {
+        "mta_id" : "a331fe94078b819c6f486a224c8ecc83"
+      }
+    },
+    "label" : "xsuaa",
+    "plan" : "application",
+    "credentials" : "********",
+    "tags" : [ ],
+    "type" : "managed",
+    "lastOperation" : {
+      "type" : "CREATE",
+      "description" : "Service broker error: service plan not found or not accessible",
+      "state" : "FAILED"
+    },
+    "resourceName" : "udi-assistant-uaa"
+  } ]
+}#
+#2026 09 19 08:12:22.584#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[DetectDeployedMtaStep] Detected deployed MTA with ID "udi-assistant" and version "0.1.0"#
+#2026 09 19 08:12:22.598#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[DetectDeployedMtaStep] Detecting backup mta by id "udi-assistant" and namespace "null"#
+#2026 09 19 08:12:22.599#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[DetectDeployedMtaStep] Getting applications by metadata label selector "mta_id=a331fe94078b819c6f486a224c8ecc83,mta_namespace=b698114a0995e936895b9598a6c19a2c"...#
+#2026 09 19 08:12:22.628#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[DetectDeployedMtaStep] Getting service instances by metadata label selector "mta_id=a331fe94078b819c6f486a224c8ecc83,mta_namespace=b698114a0995e936895b9598a6c19a2c"...#
+#2026 09 19 08:12:22.686#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[DetectDeployedMtaStep] Deployed MTA service keys: [ ]#
+#2026 09 19 08:12:22.686#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+Step "Detect Deployed MTA" finished#
+#2026 09 19 08:12:22.730#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] Executing task "collectSystemParametersTask" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:22.731#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] Collecting system parameters...#
+#2026 09 19 08:12:22.732#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] Getting default domain...#
+#2026 09 19 08:12:22.763#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] Default domain: cfapps.ap21.hana.ondemand.com#
+#2026 09 19 08:12:22.763#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] Checking for overwriting read-only parameters for mta with id: "udi-assistant"#
+#2026 09 19 08:12:22.763#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] No read-only parameters are overwritten#
+#2026 09 19 08:12:22.774#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] Descriptor with system parameters: {
+  "majorSchemaVersion" : 3,
+  "schemaVersion" : "3.3.0",
+  "id" : "udi-assistant",
+  "version" : "0.1.0",
+  "modules" : [ {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-srv",
+    "type" : "java.tomcat",
+    "path" : "udi-assistant-srv",
+    "properties" : {
+      "JBP_CONFIG_OPEN_JDK_JRE" : "{ jre: { version: 17.+ } }",
+      "JBP_CONFIG_SPRING_AUTO_RECONFIGURATION" : "{ enabled: false }",
+      "JBP_CONFIG_JAVA_CF_ENV" : "{ enabled: false }",
+      "SPRING_PROFILES_ACTIVE" : "cloud"
+    },
+    "parameters" : {
+      "default-url" : "${protocol}://${default-uri}",
+      "default-app-name" : "udi-assistant-srv",
+      "generated-password" : "********",
+      "default-live-url" : "${protocol}://${default-live-uri}",
+      "default-uri" : "${host}.${domain}",
+      "memory" : "1024M",
+      "default-instances" : 1,
+      "default-live-host" : "5d04c7c6trial-dev-udi-assistant-srv",
+      "instances" : "${default-instances}",
+      "buildpack" : "java_buildpack",
+      "default-host" : "5d04c7c6trial-dev-udi-assistant-srv",
+      "app-name" : "${default-app-name}",
+      "default-live-uri" : "5d04c7c6trial-dev-udi-assistant-srv.${domain}",
+      "protocol" : "https",
+      "default-live-app-name" : "udi-assistant-srv",
+      "default-live-domain" : "cfapps.ap21.hana.ondemand.com",
+      "disk-quota" : "512M",
+      "domain" : "${default-domain}",
+      "host" : "${default-host}",
+      "generated-user" : "********"
+    },
+    "requiredDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-uaa",
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "providedDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "srv-api",
+      "isPublic" : false,
+      "properties" : {
+        "srv-url" : "${default-url}"
+      },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    }, {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-srv",
+      "isPublic" : false,
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    },
+    "hooks" : [ ]
+  }, {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-approuter",
+    "type" : "javascript.nodejs",
+    "path" : "udi-assistant-approuter",
+    "properties" : { },
+    "parameters" : {
+      "default-url" : "${protocol}://${default-uri}",
+      "default-app-name" : "udi-assistant-approuter",
+      "generated-password" : "********",
+      "default-live-url" : "${protocol}://${default-live-uri}",
+      "default-uri" : "${host}.${domain}",
+      "memory" : "256M",
+      "default-instances" : 1,
+      "default-live-host" : "5d04c7c6trial-dev-udi-assistant-approuter",
+      "instances" : "${default-instances}",
+      "default-host" : "5d04c7c6trial-dev-udi-assistant-approuter",
+      "app-name" : "${default-app-name}",
+      "default-live-uri" : "5d04c7c6trial-dev-udi-assistant-approuter.${domain}",
+      "protocol" : "https",
+      "default-live-app-name" : "udi-assistant-approuter",
+      "default-live-domain" : "cfapps.ap21.hana.ondemand.com",
+      "disk-quota" : "256M",
+      "domain" : "${default-domain}",
+      "host" : "${default-host}",
+      "generated-user" : "********"
+    },
+    "requiredDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-uaa",
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    }, {
+      "majorSchemaVersion" : 3,
+      "name" : "srv-api",
+      "group" : "destinations",
+      "properties" : {
+        "name" : "srv-api",
+        "forwardAuthToken" : "********",
+        "url" : "~{srv-url}"
+      },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "providedDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-approuter",
+      "isPublic" : false,
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    },
+    "hooks" : [ ]
+  } ],
+  "resources" : [ {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-uaa",
+    "type" : "org.cloudfoundry.managed-service",
+    "properties" : { },
+    "parameters" : {
+      "generated-password" : "********",
+      "path" : "./xs-security.json",
+      "service-name" : "${default-service-name}",
+      "service-plan" : "application",
+      "service" : "xsuaa",
+      "generated-user" : "********",
+      "default-xsappname" : "udi-assistant-uaa",
+      "type" : "managed-service",
+      "default-service-name" : "udi-assistant-uaa",
+      "default-container-name" : "5D04C7C6TRIAL_DEV_UDI_ASSISTANT_UAA"
+    },
+    "isActive" : true,
+    "isOptional" : false,
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    },
+    "requiredDependencies" : [ ],
+    "processedAfter" : [ ]
+  } ],
+  "parameters" : {
+    "mta-id" : "udi-assistant",
+    "authorization-url" : "********",
+    "org-guid" : "57fb6741-1409-4946-84de-44f31eb13dae",
+    "org" : "5d04c7c6trial",
+    "deploy-target" : "5d04c7c6trial dev",
+    "enable-parallel-deployments" : true,
+    "space" : "dev",
+    "xs-api-url" : "https://api.cf.ap21.hana.ondemand.com",
+    "deploy-url" : "deploy-service.cfapps.ap21.hana.ondemand.com",
+    "xs-type" : "CF",
+    "default-domain" : "cfapps.ap21.hana.ondemand.com",
+    "mta-version" : "0.1.0",
+    "xs-auth-url" : "********",
+    "space-guid" : "68c6bbeb-241c-4249-99ae-030661cbfa1a",
+    "user" : "********",
+    "controller-url" : "https://api.cf.ap21.hana.ondemand.com",
+    "timestamp" : "20260919081213"
+  },
+  "parametersMetadata" : {
+    "metadata" : { }
+  }
+}#
+#2026 09 19 08:12:22.775#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] Version rule: SAME_HIGHER#
+#2026 09 19 08:12:22.776#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] Detected new MTA version: "0.1.0"#
+#2026 09 19 08:12:22.785#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] Deployed MTA version: "0.1.0"#
+#2026 09 19 08:12:22.797#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] MTA accepted for deployment#
+#2026 09 19 08:12:22.797#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+[XS2CollectSystemParametersStep] System parameters collected#
+#2026 09 19 08:12:22.798#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5095#
+Step "Collect System Parameters" finished#
+#2026 09 19 08:12:22.840#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[ProcessDescriptorStep] Executing task "processDescriptorTask" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:22.841#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[ProcessDescriptorStep] Resolving properties and parameters in merged descriptor...#
+#2026 09 19 08:12:22.845#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[ProcessDescriptorStep] Subscriptions: [ ]#
+#2026 09 19 08:12:22.845#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[ProcessDescriptorStep] MTA modules: [udi-assistant-srv, udi-assistant-approuter]#
+#2026 09 19 08:12:22.846#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[ProcessDescriptorStep] Resolved deployment descriptor: {
+  "majorSchemaVersion" : 3,
+  "schemaVersion" : "3.3.0",
+  "id" : "udi-assistant",
+  "version" : "0.1.0",
+  "modules" : [ {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-srv",
+    "type" : "java.tomcat",
+    "path" : "udi-assistant-srv",
+    "properties" : {
+      "JBP_CONFIG_OPEN_JDK_JRE" : "{ jre: { version: 17.+ } }",
+      "JBP_CONFIG_SPRING_AUTO_RECONFIGURATION" : "{ enabled: false }",
+      "JBP_CONFIG_JAVA_CF_ENV" : "{ enabled: false }",
+      "SPRING_PROFILES_ACTIVE" : "cloud"
+    },
+    "parameters" : {
+      "default-url" : "https://5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com",
+      "default-app-name" : "udi-assistant-srv",
+      "generated-password" : "********",
+      "default-live-url" : "https://5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com",
+      "default-uri" : "5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com",
+      "memory" : "1024M",
+      "default-instances" : 1,
+      "default-live-host" : "5d04c7c6trial-dev-udi-assistant-srv",
+      "instances" : 1,
+      "buildpack" : "java_buildpack",
+      "default-host" : "5d04c7c6trial-dev-udi-assistant-srv",
+      "app-name" : "udi-assistant-srv",
+      "default-live-uri" : "5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com",
+      "protocol" : "https",
+      "default-live-app-name" : "udi-assistant-srv",
+      "default-live-domain" : "cfapps.ap21.hana.ondemand.com",
+      "disk-quota" : "512M",
+      "domain" : "cfapps.ap21.hana.ondemand.com",
+      "host" : "5d04c7c6trial-dev-udi-assistant-srv",
+      "generated-user" : "********"
+    },
+    "requiredDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-uaa",
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "providedDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "srv-api",
+      "isPublic" : false,
+      "properties" : {
+        "srv-url" : "https://5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com"
+      },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    }, {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-srv",
+      "isPublic" : false,
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    },
+    "hooks" : [ ]
+  }, {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-approuter",
+    "type" : "javascript.nodejs",
+    "path" : "udi-assistant-approuter",
+    "properties" : { },
+    "parameters" : {
+      "default-url" : "https://5d04c7c6trial-dev-udi-assistant-approuter.cfapps.ap21.hana.ondemand.com",
+      "default-app-name" : "udi-assistant-approuter",
+      "generated-password" : "********",
+      "default-live-url" : "https://5d04c7c6trial-dev-udi-assistant-approuter.cfapps.ap21.hana.ondemand.com",
+      "default-uri" : "5d04c7c6trial-dev-udi-assistant-approuter.cfapps.ap21.hana.ondemand.com",
+      "memory" : "256M",
+      "default-instances" : 1,
+      "default-live-host" : "5d04c7c6trial-dev-udi-assistant-approuter",
+      "instances" : 1,
+      "default-host" : "5d04c7c6trial-dev-udi-assistant-approuter",
+      "app-name" : "udi-assistant-approuter",
+      "default-live-uri" : "5d04c7c6trial-dev-udi-assistant-approuter.cfapps.ap21.hana.ondemand.com",
+      "protocol" : "https",
+      "default-live-app-name" : "udi-assistant-approuter",
+      "default-live-domain" : "cfapps.ap21.hana.ondemand.com",
+      "disk-quota" : "256M",
+      "domain" : "cfapps.ap21.hana.ondemand.com",
+      "host" : "5d04c7c6trial-dev-udi-assistant-approuter",
+      "generated-user" : "********"
+    },
+    "requiredDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-uaa",
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    }, {
+      "majorSchemaVersion" : 3,
+      "name" : "srv-api",
+      "group" : "destinations",
+      "properties" : {
+        "name" : "srv-api",
+        "forwardAuthToken" : "********",
+        "url" : "https://5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com"
+      },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "providedDependencies" : [ {
+      "majorSchemaVersion" : 3,
+      "name" : "udi-assistant-approuter",
+      "isPublic" : false,
+      "properties" : { },
+      "parameters" : { },
+      "propertiesMetadata" : {
+        "metadata" : { }
+      },
+      "parametersMetadata" : {
+        "metadata" : { }
+      }
+    } ],
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    },
+    "hooks" : [ ]
+  } ],
+  "resources" : [ {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-uaa",
+    "type" : "org.cloudfoundry.managed-service",
+    "properties" : { },
+    "parameters" : {
+      "generated-password" : "********",
+      "path" : "./xs-security.json",
+      "service-name" : "udi-assistant-uaa",
+      "service-plan" : "application",
+      "service" : "xsuaa",
+      "generated-user" : "********",
+      "default-xsappname" : "udi-assistant-uaa",
+      "type" : "managed-service",
+      "default-service-name" : "udi-assistant-uaa",
+      "default-container-name" : "5D04C7C6TRIAL_DEV_UDI_ASSISTANT_UAA"
+    },
+    "isActive" : true,
+    "isOptional" : false,
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    },
+    "requiredDependencies" : [ ],
+    "processedAfter" : [ ]
+  } ],
+  "parameters" : {
+    "mta-id" : "udi-assistant",
+    "authorization-url" : "********",
+    "org-guid" : "57fb6741-1409-4946-84de-44f31eb13dae",
+    "org" : "5d04c7c6trial",
+    "deploy-target" : "5d04c7c6trial dev",
+    "enable-parallel-deployments" : true,
+    "region-primary-domain" : "ap21.hana.ondemand.com",
+    "space" : "dev",
+    "region-domain" : "ap21.hana.ondemand.com",
+    "xs-api-url" : "https://api.cf.ap21.hana.ondemand.com",
+    "deploy-url" : "deploy-service.cfapps.ap21.hana.ondemand.com",
+    "xs-type" : "CF",
+    "default-domain" : "cfapps.ap21.hana.ondemand.com",
+    "mta-version" : "0.1.0",
+    "xs-auth-url" : "********",
+    "space-guid" : "68c6bbeb-241c-4249-99ae-030661cbfa1a",
+    "user" : "********",
+    "controller-url" : "https://api.cf.ap21.hana.ondemand.com",
+    "timestamp" : "20260919081213"
+  },
+  "parametersMetadata" : {
+    "metadata" : { }
+  }
+}#
+#2026 09 19 08:12:22.846#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[ProcessDescriptorStep] Merged descriptor properties and parameters resolved#
+#2026 09 19 08:12:22.846#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+Step "Process Descriptor Step" finished#
+#2026 09 19 08:12:22.886#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] Executing task "buildDeployModelTask" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:22.889#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] Service keys defined for content deployment grouped by service name: { }#
+#2026 09 19 08:12:22.889#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] Building cloud deployment model...#
+#2026 09 19 08:12:22.891#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] MTA archive modules: [udi-assistant-srv, udi-assistant-approuter]#
+#2026 09 19 08:12:22.891#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] Deployed modules: []#
+#2026 09 19 08:12:22.891#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] MTA modules: [udi-assistant-srv, udi-assistant-approuter]#
+#2026 09 19 08:12:22.891#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] Service keys to create: {
+  "udi-assistant-uaa" : [ ]
+}#
+#2026 09 19 08:12:22.892#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] Modules to deploy: [{
+  "majorSchemaVersion" : 3,
+  "name" : "udi-assistant-srv",
+  "type" : "java.tomcat",
+  "path" : "udi-assistant-srv",
+  "properties" : {
+    "JBP_CONFIG_OPEN_JDK_JRE" : "{ jre: { version: 17.+ } }",
+    "JBP_CONFIG_SPRING_AUTO_RECONFIGURATION" : "{ enabled: false }",
+    "JBP_CONFIG_JAVA_CF_ENV" : "{ enabled: false }",
+    "SPRING_PROFILES_ACTIVE" : "cloud"
+  },
+  "parameters" : {
+    "default-url" : "https://5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com",
+    "default-app-name" : "udi-assistant-srv",
+    "generated-password" : "********",
+    "default-live-url" : "https://5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com",
+    "default-uri" : "5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com",
+    "memory" : "1024M",
+    "default-instances" : 1,
+    "default-live-host" : "5d04c7c6trial-dev-udi-assistant-srv",
+    "instances" : 1,
+    "buildpack" : "java_buildpack",
+    "default-host" : "5d04c7c6trial-dev-udi-assistant-srv",
+    "app-name" : "udi-assistant-srv",
+    "default-live-uri" : "5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com",
+    "protocol" : "https",
+    "default-live-app-name" : "udi-assistant-srv",
+    "default-live-domain" : "cfapps.ap21.hana.ondemand.com",
+    "disk-quota" : "512M",
+    "dependency-type" : "soft",
+    "domain" : "cfapps.ap21.hana.ondemand.com",
+    "host" : "5d04c7c6trial-dev-udi-assistant-srv",
+    "generated-user" : "********"
+  },
+  "requiredDependencies" : [ {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-uaa",
+    "properties" : { },
+    "parameters" : { },
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    }
+  } ],
+  "providedDependencies" : [ {
+    "majorSchemaVersion" : 3,
+    "name" : "srv-api",
+    "isPublic" : false,
+    "properties" : {
+      "srv-url" : "https://5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com"
+    },
+    "parameters" : { },
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    }
+  }, {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-srv",
+    "isPublic" : false,
+    "properties" : { },
+    "parameters" : { },
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    }
+  } ],
+  "propertiesMetadata" : {
+    "metadata" : { }
+  },
+  "parametersMetadata" : {
+    "metadata" : { }
+  },
+  "deployedAfter" : [ ],
+  "hooks" : [ ]
+}, {
+  "majorSchemaVersion" : 3,
+  "name" : "udi-assistant-approuter",
+  "type" : "javascript.nodejs",
+  "path" : "udi-assistant-approuter",
+  "properties" : { },
+  "parameters" : {
+    "default-url" : "https://5d04c7c6trial-dev-udi-assistant-approuter.cfapps.ap21.hana.ondemand.com",
+    "default-app-name" : "udi-assistant-approuter",
+    "generated-password" : "********",
+    "default-live-url" : "https://5d04c7c6trial-dev-udi-assistant-approuter.cfapps.ap21.hana.ondemand.com",
+    "default-uri" : "5d04c7c6trial-dev-udi-assistant-approuter.cfapps.ap21.hana.ondemand.com",
+    "memory" : "256M",
+    "default-instances" : 1,
+    "default-live-host" : "5d04c7c6trial-dev-udi-assistant-approuter",
+    "instances" : 1,
+    "default-host" : "5d04c7c6trial-dev-udi-assistant-approuter",
+    "app-name" : "udi-assistant-approuter",
+    "default-live-uri" : "5d04c7c6trial-dev-udi-assistant-approuter.cfapps.ap21.hana.ondemand.com",
+    "protocol" : "https",
+    "default-live-app-name" : "udi-assistant-approuter",
+    "default-live-domain" : "cfapps.ap21.hana.ondemand.com",
+    "disk-quota" : "256M",
+    "dependency-type" : "soft",
+    "domain" : "cfapps.ap21.hana.ondemand.com",
+    "host" : "5d04c7c6trial-dev-udi-assistant-approuter",
+    "generated-user" : "********"
+  },
+  "requiredDependencies" : [ {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-uaa",
+    "properties" : { },
+    "parameters" : { },
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    }
+  }, {
+    "majorSchemaVersion" : 3,
+    "name" : "srv-api",
+    "group" : "destinations",
+    "properties" : {
+      "name" : "srv-api",
+      "forwardAuthToken" : "********",
+      "url" : "https://5d04c7c6trial-dev-udi-assistant-srv.cfapps.ap21.hana.ondemand.com"
+    },
+    "parameters" : { },
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    }
+  } ],
+  "providedDependencies" : [ {
+    "majorSchemaVersion" : 3,
+    "name" : "udi-assistant-approuter",
+    "isPublic" : false,
+    "properties" : { },
+    "parameters" : { },
+    "propertiesMetadata" : {
+      "metadata" : { }
+    },
+    "parametersMetadata" : {
+      "metadata" : { }
+    }
+  } ],
+  "propertiesMetadata" : {
+    "metadata" : { }
+  },
+  "parametersMetadata" : {
+    "metadata" : { }
+  },
+  "deployedAfter" : [ ],
+  "hooks" : [ ]
+}]#
+#2026 09 19 08:12:22.893#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] Custom domains: []#
+#2026 09 19 08:12:22.895#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] Calculating resource batches...#
+#2026 09 19 08:12:22.895#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] Calculating resource batches completed.#
+#2026 09 19 08:12:22.895#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[XS2BuildCloudDeployModelStep] Cloud deployment model built#
+#2026 09 19 08:12:22.895#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+Step "Build Deploy Model" finished#
+#2026 09 19 08:12:22.941#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] Executing task "buildUndeployModelTask" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:22.942#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] Building cloud undeployment model...#
+#2026 09 19 08:12:22.943#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] Detecting service keys to delete.#
+#2026 09 19 08:12:22.944#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] No deployed service keys detected!#
+#2026 09 19 08:12:22.944#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] Detected service keys to delete "[]"#
+#2026 09 19 08:12:22.948#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] MTA modules: [udi-assistant-srv, udi-assistant-approuter]#
+#2026 09 19 08:12:22.948#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] Modules to undeploy: [ ]#
+#2026 09 19 08:12:22.948#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] Modules that won't be changed: [ ]#
+#2026 09 19 08:12:22.950#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] Subscriptions to delete: [ ]#
+#2026 09 19 08:12:22.951#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] Cloud services to delete: []#
+#2026 09 19 08:12:22.951#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] Cloud applications to undeploy: [ ]#
+#2026 09 19 08:12:22.954#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+[BuildCloudUndeployModelStep] Cloud undeployment model built#
+#2026 09 19 08:12:22.954#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5097#
+Step "Build Undeploy Model" finished#
+#2026 09 19 08:12:22.994#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5093#
+[AddDomainsStep] Executing task "addDomainsTask" of process "d1a5b1d0-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:22.996#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5093#
+[AddDomainsStep] Custom domains: []#
+#2026 09 19 08:12:22.996#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5093#
+Step "Add Domains" finished#
+#2026 09 19 08:12:28.707#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5100#
+[ExtractBatchedServicesWithResolvedDynamicParametersStep] Executing task "prepareModulesDeploymentTask" of process "d79ccb60-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:28.708#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5100#
+[ExtractBatchedServicesWithResolvedDynamicParametersStep] Extracting services and resolving dynamic parameters from batch#
+#2026 09 19 08:12:28.709#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5100#
+[ExtractBatchedServicesWithResolvedDynamicParametersStep] Services to create: [ {
+  "isOptional" : false,
+  "isManaged" : true,
+  "name" : "udi-assistant-uaa",
+  "v3Metadata" : {
+    "annotations" : {
+      "mta_id" : "udi-assistant",
+      "mta_version" : "0.1.0",
+      "mta_resource" : "{\"name\":\"udi-assistant-uaa\"}"
+    },
+    "labels" : {
+      "mta_id" : "a331fe94078b819c6f486a224c8ecc83"
+    }
+  },
+  "label" : "xsuaa",
+  "plan" : "application",
+  "credentials" : "********",
+  "tags" : [ ],
+  "type" : "managed",
+  "resourceName" : "udi-assistant-uaa",
+  "shouldSkipParametersUpdate" : false,
+  "shouldSkipPlanUpdate" : false,
+  "shouldSkipTagsUpdate" : false,
+  "shouldSkipSyslogUrlUpdate" : false
+} ]#
+#2026 09 19 08:12:28.710#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5100#
+Step "Extract Services with Resolved Dynamic parameters from batch" finished#
+#2026 09 19 08:12:28.812#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5102#
+[CheckServiceOperationStateStep] Executing task "CheckServiceOperationStateTask" of process "db03c4b6-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:28.813#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5102#
+[CheckServiceOperationStateStep] Getting service instance "udi-assistant-uaa"...#
+#2026 09 19 08:12:28.906#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5102#
+Step "Check for service operations in Progress" finished#
+#2026 09 19 08:12:28.945#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5103#
+[DetermineServiceCreateUpdateServiceActionsStep] Executing task "DetermineServiceCreateUpdateActionsTask" of process "db03c4b6-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:28.947#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5103#
+[DetermineServiceCreateUpdateServiceActionsStep] Processing service "udi-assistant-uaa"...#
+#2026 09 19 08:12:28.956#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5103#
+[DetermineServiceCreateUpdateServiceActionsStep] Getting service instance "udi-assistant-uaa"...#
+#2026 09 19 08:12:29.059#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5103#
+[DetermineServiceCreateUpdateServiceActionsStep] Setting service "udi-assistant-uaa" parameters from "xs-security.json"#
+#2026 09 19 08:12:29.100#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5103#
+[DetermineServiceCreateUpdateServiceActionsStep] Existing service: {
+  "name" : "udi-assistant-uaa",
+  "metadata" : {
+    "guid" : "7ae81cce-3684-4102-a8cd-937438dabd42",
+    "createdAt" : [ 2026, 9, 19, 8, 9, 16 ],
+    "updatedAt" : [ 2026, 9, 19, 8, 9, 16 ]
+  },
+  "v3Metadata" : {
+    "annotations" : {
+      "mta_id" : "udi-assistant",
+      "mta_version" : "0.1.0",
+      "mta_resource" : "{\"name\":\"udi-assistant-uaa\"}"
+    },
+    "labels" : {
+      "mta_id" : "a331fe94078b819c6f486a224c8ecc83"
+    }
+  },
+  "label" : "xsuaa",
+  "plan" : "application",
+  "credentials" : "********",
+  "tags" : [ ],
+  "type" : "managed",
+  "lastOperation" : {
+    "type" : "CREATE",
+    "description" : "Service broker error: service plan not found or not accessible",
+    "state" : "FAILED"
+  }
+}#
+#2026 09 19 08:12:29.100#Z#WARN#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5103#
+[DetermineServiceCreateUpdateServiceActionsStep] Service "udi-assistant-uaa" is in state "create failed" and may not be operational. Actions like update of credentials and binding may fail! Consider recreating it by specifying the --delete-services option.#
+#2026 09 19 08:12:29.110#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5103#
+[DetermineServiceCreateUpdateServiceActionsStep] Service parameters will be updated#
+#2026 09 19 08:12:29.110#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5103#
+[DetermineServiceCreateUpdateServiceActionsStep] New parameters: {
+  "description" : "UDI Assistant - device master data with audit trail",
+  "oauth2-configuration" : "********",
+  "role-collections" : [ {
+    "name" : "udi-assistant-Viewer",
+    "description" : "UDI Assistant: view devices",
+    "role-template-references" : [ "$XSAPPNAME.Viewer" ]
+  }, {
+    "name" : "udi-assistant-Editor",
+    "description" : "UDI Assistant: edit devices",
+    "role-template-references" : [ "$XSAPPNAME.Editor" ]
+  } ],
+  "role-templates" : [ {
+    "name" : "Viewer",
+    "description" : "Read-only access to device master data",
+    "scope-references" : [ "$XSAPPNAME.Viewer" ]
+  }, {
+    "name" : "Editor",
+    "description" : "Read and write access to device master data",
+    "scope-references" : [ "$XSAPPNAME.Viewer", "$XSAPPNAME.Editor" ]
+  } ],
+  "scopes" : [ {
+    "name" : "$XSAPPNAME.Viewer",
+    "description" : "Read devices and their audit trail"
+  }, {
+    "name" : "$XSAPPNAME.Editor",
+    "description" : "Create devices, change details and registration status"
+  } ],
+  "tenant-mode" : "dedicated",
+  "xsappname" : "udi-assistant"
+}#
+#2026 09 19 08:12:29.110#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5103#
+Step "Determine update actions" finished#
+#2026 09 19 08:12:29.169#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5104#
+[CheckForServiceBindingOrKeyOperationStep] Executing task "CheckForServiceBindingOrKeyCreation" of process "db03c4b6-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:29.170#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5104#
+Step "Check for service binding or key creation" finished#
+#2026 09 19 08:12:29.222#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5105#
+[UpdateServiceParametersStep] Executing task "UpdateServiceParametersTask" of process "db03c4b6-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:29.225#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5105#
+[UpdateServiceParametersStep] Updating service "udi-assistant-uaa"...#
+#2026 09 19 08:12:29.234#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5105#
+[UpdateServiceParametersStep] Updating service parameters for service "udi-assistant-uaa"...#
+#2026 09 19 08:12:29.304#Z#ERROR#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5105#
+Exception caught#
+org.cloudfoundry.multiapps.common.SLException: Service operation failed: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa 
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.processException(SyncFlowableStep.java:159)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.onStepError(SyncFlowableStep.java:154)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.handleException(SyncFlowableStep.java:130)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.executeInternal(SyncFlowableStep.java:91)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.lambda$execute$0(SyncFlowableStep.java:75)
+	at org.cloudfoundry.multiapps.controller.core.util.LoggingUtil.logWithCorrelationId(LoggingUtil.java:14)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.execute(SyncFlowableStep.java:75)
+	at org.flowable.engine.impl.delegate.invocation.JavaDelegateInvocation.invoke(JavaDelegateInvocation.java:35)
+	at org.flowable.engine.impl.delegate.invocation.DelegateInvocation.proceed(DelegateInvocation.java:32)
+	at org.flowable.engine.impl.delegate.invocation.DefaultDelegateInterceptor.handleInvocation(DefaultDelegateInterceptor.java:26)
+	at org.flowable.engine.impl.bpmn.behavior.ServiceTaskDelegateExpressionActivityBehavior.execute(ServiceTaskDelegateExpressionActivityBehavior.java:177)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.executeActivityBehavior(ContinueProcessOperation.java:298)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.executeSynchronous(ContinueProcessOperation.java:175)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.continueThroughFlowNode(ContinueProcessOperation.java:125)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.run(ContinueProcessOperation.java:88)
+	at org.flowable.common.engine.impl.AbstractEngineConfiguration.lambda$new$0(AbstractEngineConfiguration.java:198)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:189)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:128)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:80)
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:26)
+	at org.flowable.common.engine.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53)
+	at org.flowable.common.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:105)
+	at org.flowable.common.spring.SpringTransactionInterceptor.lambda$execute$0(SpringTransactionInterceptor.java:57)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.flowable.common.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:57)
+	at org.flowable.common.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30)
+	at org.flowable.common.engine.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56)
+	at org.flowable.common.engine.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.handleTransactionalJob(ExecuteAsyncRunnable.java:177)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.executeJob(ExecuteAsyncRunnable.java:146)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.runInternally(ExecuteAsyncRunnable.java:122)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.run(ExecuteAsyncRunnable.java:96)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: org.cloudfoundry.multiapps.controller.client.facade.CloudControllerException: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.handleControllerException(SyncFlowableStep.java:164)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.processException(SyncFlowableStep.java:158)
+	... 34 more
+Caused by: org.cloudfoundry.multiapps.controller.client.facade.CloudControllerException: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa
+	at org.cloudfoundry.multiapps.controller.process.steps.ServiceStep.processServiceActionFailure(ServiceStep.java:73)
+	at org.cloudfoundry.multiapps.controller.process.steps.UpdateServiceParametersStep.executeOperation(UpdateServiceParametersStep.java:47)
+	at org.cloudfoundry.multiapps.controller.process.steps.ServiceStep.executeAsyncStep(ServiceStep.java:32)
+	at org.cloudfoundry.multiapps.controller.process.steps.AsyncFlowableStep.executeStep(AsyncFlowableStep.java:18)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.executeInternal(SyncFlowableStep.java:85)
+	... 31 more
+#2026 09 19 08:12:29.325#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5105#
+Step "Update parameters" finished#
+#2026 09 19 08:12:30.219#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[UpdateServiceParametersStep] Executing task "UpdateServiceParametersTask" of process "db03c4b6-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:30.306#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[UpdateServiceParametersStep] Updating service "udi-assistant-uaa"...#
+#2026 09 19 08:12:30.317#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+[UpdateServiceParametersStep] Updating service parameters for service "udi-assistant-uaa"...#
+#2026 09 19 08:12:30.392#Z#ERROR#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+Exception caught#
+org.cloudfoundry.multiapps.common.SLException: Service operation failed: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa 
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.processException(SyncFlowableStep.java:159)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.onStepError(SyncFlowableStep.java:154)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.handleException(SyncFlowableStep.java:130)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.executeInternal(SyncFlowableStep.java:91)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.lambda$execute$0(SyncFlowableStep.java:75)
+	at org.cloudfoundry.multiapps.controller.core.util.LoggingUtil.logWithCorrelationId(LoggingUtil.java:14)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.execute(SyncFlowableStep.java:75)
+	at org.flowable.engine.impl.delegate.invocation.JavaDelegateInvocation.invoke(JavaDelegateInvocation.java:35)
+	at org.flowable.engine.impl.delegate.invocation.DelegateInvocation.proceed(DelegateInvocation.java:32)
+	at org.flowable.engine.impl.delegate.invocation.DefaultDelegateInterceptor.handleInvocation(DefaultDelegateInterceptor.java:26)
+	at org.flowable.engine.impl.bpmn.behavior.ServiceTaskDelegateExpressionActivityBehavior.execute(ServiceTaskDelegateExpressionActivityBehavior.java:177)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.executeActivityBehavior(ContinueProcessOperation.java:298)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.executeSynchronous(ContinueProcessOperation.java:175)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.continueThroughFlowNode(ContinueProcessOperation.java:125)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.run(ContinueProcessOperation.java:88)
+	at org.flowable.common.engine.impl.AbstractEngineConfiguration.lambda$new$0(AbstractEngineConfiguration.java:198)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:189)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:128)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:80)
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:26)
+	at org.flowable.common.engine.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53)
+	at org.flowable.common.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:105)
+	at org.flowable.common.spring.SpringTransactionInterceptor.lambda$execute$0(SpringTransactionInterceptor.java:57)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.flowable.common.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:57)
+	at org.flowable.common.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30)
+	at org.flowable.common.engine.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56)
+	at org.flowable.common.engine.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.handleTransactionalJob(ExecuteAsyncRunnable.java:177)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.executeJob(ExecuteAsyncRunnable.java:146)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.runInternally(ExecuteAsyncRunnable.java:122)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.run(ExecuteAsyncRunnable.java:96)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: org.cloudfoundry.multiapps.controller.client.facade.CloudControllerException: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.handleControllerException(SyncFlowableStep.java:164)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.processException(SyncFlowableStep.java:158)
+	... 34 more
+Caused by: org.cloudfoundry.multiapps.controller.client.facade.CloudControllerException: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa
+	at org.cloudfoundry.multiapps.controller.process.steps.ServiceStep.processServiceActionFailure(ServiceStep.java:73)
+	at org.cloudfoundry.multiapps.controller.process.steps.UpdateServiceParametersStep.executeOperation(UpdateServiceParametersStep.java:47)
+	at org.cloudfoundry.multiapps.controller.process.steps.ServiceStep.executeAsyncStep(ServiceStep.java:32)
+	at org.cloudfoundry.multiapps.controller.process.steps.AsyncFlowableStep.executeStep(AsyncFlowableStep.java:18)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.executeInternal(SyncFlowableStep.java:85)
+	... 31 more
+#2026 09 19 08:12:30.403#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5099#
+Step "Update parameters" finished#
+#2026 09 19 08:12:33.791#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5105#
+[UpdateServiceParametersStep] Executing task "UpdateServiceParametersTask" of process "db03c4b6-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:33.855#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5105#
+[UpdateServiceParametersStep] Updating service "udi-assistant-uaa"...#
+#2026 09 19 08:12:33.864#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5105#
+[UpdateServiceParametersStep] Updating service parameters for service "udi-assistant-uaa"...#
+#2026 09 19 08:12:33.936#Z#ERROR#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5105#
+Exception caught#
+org.cloudfoundry.multiapps.common.SLException: Service operation failed: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa 
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.processException(SyncFlowableStep.java:159)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.onStepError(SyncFlowableStep.java:154)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.handleException(SyncFlowableStep.java:130)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.executeInternal(SyncFlowableStep.java:91)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.lambda$execute$0(SyncFlowableStep.java:75)
+	at org.cloudfoundry.multiapps.controller.core.util.LoggingUtil.logWithCorrelationId(LoggingUtil.java:14)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.execute(SyncFlowableStep.java:75)
+	at org.flowable.engine.impl.delegate.invocation.JavaDelegateInvocation.invoke(JavaDelegateInvocation.java:35)
+	at org.flowable.engine.impl.delegate.invocation.DelegateInvocation.proceed(DelegateInvocation.java:32)
+	at org.flowable.engine.impl.delegate.invocation.DefaultDelegateInterceptor.handleInvocation(DefaultDelegateInterceptor.java:26)
+	at org.flowable.engine.impl.bpmn.behavior.ServiceTaskDelegateExpressionActivityBehavior.execute(ServiceTaskDelegateExpressionActivityBehavior.java:177)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.executeActivityBehavior(ContinueProcessOperation.java:298)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.executeSynchronous(ContinueProcessOperation.java:175)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.continueThroughFlowNode(ContinueProcessOperation.java:125)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.run(ContinueProcessOperation.java:88)
+	at org.flowable.common.engine.impl.AbstractEngineConfiguration.lambda$new$0(AbstractEngineConfiguration.java:198)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:189)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:128)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:80)
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:26)
+	at org.flowable.common.engine.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53)
+	at org.flowable.common.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:105)
+	at org.flowable.common.spring.SpringTransactionInterceptor.lambda$execute$0(SpringTransactionInterceptor.java:57)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.flowable.common.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:57)
+	at org.flowable.common.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30)
+	at org.flowable.common.engine.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56)
+	at org.flowable.common.engine.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.handleTransactionalJob(ExecuteAsyncRunnable.java:177)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.executeJob(ExecuteAsyncRunnable.java:146)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.runInternally(ExecuteAsyncRunnable.java:122)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.run(ExecuteAsyncRunnable.java:96)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: org.cloudfoundry.multiapps.controller.client.facade.CloudControllerException: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.handleControllerException(SyncFlowableStep.java:164)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.processException(SyncFlowableStep.java:158)
+	... 34 more
+Caused by: org.cloudfoundry.multiapps.controller.client.facade.CloudControllerException: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa
+	at org.cloudfoundry.multiapps.controller.process.steps.ServiceStep.processServiceActionFailure(ServiceStep.java:73)
+	at org.cloudfoundry.multiapps.controller.process.steps.UpdateServiceParametersStep.executeOperation(UpdateServiceParametersStep.java:47)
+	at org.cloudfoundry.multiapps.controller.process.steps.ServiceStep.executeAsyncStep(ServiceStep.java:32)
+	at org.cloudfoundry.multiapps.controller.process.steps.AsyncFlowableStep.executeStep(AsyncFlowableStep.java:18)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.executeInternal(SyncFlowableStep.java:85)
+	... 31 more
+#2026 09 19 08:12:33.946#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5105#
+Step "Update parameters" finished#
+#2026 09 19 08:12:37.341#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5106#
+[UpdateServiceParametersStep] Executing task "UpdateServiceParametersTask" of process "db03c4b6-b401-11f1-ab01-eeee0a8ce143"...#
+#2026 09 19 08:12:37.412#Z#INFO#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5106#
+[UpdateServiceParametersStep] Updating service "udi-assistant-uaa"...#
+#2026 09 19 08:12:37.421#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5106#
+[UpdateServiceParametersStep] Updating service parameters for service "udi-assistant-uaa"...#
+#2026 09 19 08:12:37.504#Z#ERROR#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5106#
+Exception caught#
+org.cloudfoundry.multiapps.common.SLException: Service operation failed: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa 
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.processException(SyncFlowableStep.java:159)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.onStepError(SyncFlowableStep.java:154)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.handleException(SyncFlowableStep.java:130)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.executeInternal(SyncFlowableStep.java:91)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.lambda$execute$0(SyncFlowableStep.java:75)
+	at org.cloudfoundry.multiapps.controller.core.util.LoggingUtil.logWithCorrelationId(LoggingUtil.java:14)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.execute(SyncFlowableStep.java:75)
+	at org.flowable.engine.impl.delegate.invocation.JavaDelegateInvocation.invoke(JavaDelegateInvocation.java:35)
+	at org.flowable.engine.impl.delegate.invocation.DelegateInvocation.proceed(DelegateInvocation.java:32)
+	at org.flowable.engine.impl.delegate.invocation.DefaultDelegateInterceptor.handleInvocation(DefaultDelegateInterceptor.java:26)
+	at org.flowable.engine.impl.bpmn.behavior.ServiceTaskDelegateExpressionActivityBehavior.execute(ServiceTaskDelegateExpressionActivityBehavior.java:177)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.executeActivityBehavior(ContinueProcessOperation.java:298)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.executeSynchronous(ContinueProcessOperation.java:175)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.continueThroughFlowNode(ContinueProcessOperation.java:125)
+	at org.flowable.engine.impl.agenda.ContinueProcessOperation.run(ContinueProcessOperation.java:88)
+	at org.flowable.common.engine.impl.AbstractEngineConfiguration.lambda$new$0(AbstractEngineConfiguration.java:198)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:189)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:128)
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:80)
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:26)
+	at org.flowable.common.engine.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53)
+	at org.flowable.common.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:105)
+	at org.flowable.common.spring.SpringTransactionInterceptor.lambda$execute$0(SpringTransactionInterceptor.java:57)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.flowable.common.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:57)
+	at org.flowable.common.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30)
+	at org.flowable.common.engine.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56)
+	at org.flowable.common.engine.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.handleTransactionalJob(ExecuteAsyncRunnable.java:177)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.executeJob(ExecuteAsyncRunnable.java:146)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.runInternally(ExecuteAsyncRunnable.java:122)
+	at org.flowable.job.service.impl.asyncexecutor.ExecuteAsyncRunnable.run(ExecuteAsyncRunnable.java:96)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1474)
+Caused by: org.cloudfoundry.multiapps.controller.client.facade.CloudControllerException: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.handleControllerException(SyncFlowableStep.java:164)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.processException(SyncFlowableStep.java:158)
+	... 34 more
+Caused by: org.cloudfoundry.multiapps.controller.client.facade.CloudControllerException: Controller operation failed: 404 Not Found: Error creating or updating service instance: Could not update parameters of service "udi-assistant-uaa" : CF-ServiceInstanceNotFound(60004): The service instance could not be found: udi-assistant-uaa
+	at org.cloudfoundry.multiapps.controller.process.steps.ServiceStep.processServiceActionFailure(ServiceStep.java:73)
+	at org.cloudfoundry.multiapps.controller.process.steps.UpdateServiceParametersStep.executeOperation(UpdateServiceParametersStep.java:47)
+	at org.cloudfoundry.multiapps.controller.process.steps.ServiceStep.executeAsyncStep(ServiceStep.java:32)
+	at org.cloudfoundry.multiapps.controller.process.steps.AsyncFlowableStep.executeStep(AsyncFlowableStep.java:18)
+	at org.cloudfoundry.multiapps.controller.process.steps.SyncFlowableStep.executeInternal(SyncFlowableStep.java:85)
+	... 31 more
+#2026 09 19 08:12:37.516#Z#DEBUG#d1a58a9a-b401-11f1-ab01-eeee0a8ce143.OPERATION#flowable-async-job-executor-thread-5106#
+Step "Update parameters" finished#
